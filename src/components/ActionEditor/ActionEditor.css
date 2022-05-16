@@ -1,0 +1,19 @@
+.ActionEditor {
+    display: inline-block;
+    text-align: left;
+    width: 80%;
+    border: 1px solid #888888;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    position: relative;
+}
+
+label {
+    font-size: smaller;
+}
+
+.actionTools {
+    position: absolute;
+    top: 0;
+    right: 0;
+}

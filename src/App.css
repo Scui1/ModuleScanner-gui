@@ -1,0 +1,31 @@
+.App {
+  text-align: center;
+  background-color: #272727;
+  font-size: 24px;
+  color: rgba(238, 238, 238, 0.986);
+}
+
+.split {
+  height: 100%;
+  position: fixed;
+  top: 0;
+}
+
+.left {
+  width: 20%;
+  left: 0;
+  background-color: #3f3f3f;
+}
+
+.right {
+  width: 80%;
+  right: 0;
+  background-color: #363636;
+  border-left-width: 1px;
+  border-left-color: rgb(153, 141, 119);
+  border-left-style: solid;
+}
+
+p {
+  margin: 0;
+}

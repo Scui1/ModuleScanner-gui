@@ -1,0 +1,22 @@
+.PatternEditorComponent {
+    width: 100%;
+    height: 100%;
+    
+    overflow-y: scroll;
+}
+
+.PatternEditorHeader [contenteditable] {
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+    font-weight: bold;
+    outline: 0px solid transparent;
+}
+
+.ActionsContainer {
+    text-align: center
+}
+
+.PatternEditorFooter {
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+}
