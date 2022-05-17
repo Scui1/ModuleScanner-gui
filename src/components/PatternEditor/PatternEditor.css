@@ -5,7 +5,7 @@
     overflow-y: scroll;
 }
 
-.PatternEditorHeader [contenteditable] {
+.PatternEditorHeader [contentEditable] {
     padding-top: 5vh;
     padding-bottom: 5vh;
     font-weight: bold;
