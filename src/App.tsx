@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import './App.css';
 import ModuleSelection from './components/ModuleSelection/ModuleSelection';
 import PatternEditor from './components/PatternEditor/PatternEditor';

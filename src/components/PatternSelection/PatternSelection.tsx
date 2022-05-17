@@ -1,7 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import './PatternSelection.css';
-
 const patterns = ["Pattern1", "Pattern2", "Pattern3", "Pattern4"]
 
 const PatternSelection = () => {
@@ -19,9 +17,5 @@ const PatternSelection = () => {
   </div>
   );
 }
-
-PatternSelection.propTypes = {};
-
-PatternSelection.defaultProps = {};
 
 export default PatternSelection;

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import * as React from 'react';
+import { useState } from 'react';
 import './ActionEditor.css';
 
 const possibleActionTypes = ["PatternSearch", "StringSearch", "Offset", "FollowJmp", "GetValue", "GetVFuncIndex"]
@@ -6,11 +7,11 @@ const possibleActionTypes = ["PatternSearch", "StringSearch", "Offset", "FollowJ
 
 const ActionEditor = () => {
   const [selectedActionType, setSelectedActionType] = useState(possibleActionTypes[0]);
-  function onChangeActionType(e) {
-    setSelectedActionType(e.target.value)
+  function onChangeActionType(e: React.FormEvent<HTMLSelectElement>) {
+    setSelectedActionType(e.currentTarget.value)
   }
 
-  function renderArguments (actionType) {
+  function renderArguments (actionType: String) {
     switch (actionType) {
       case "PatternSearch":
         return (

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import './ModuleSelection.css';
 
 const modules = ["client.dll", "engine.dll", "server.dll", "materialsystem.dll"];
