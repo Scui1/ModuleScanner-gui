@@ -1,26 +1,35 @@
 import * as React from 'react';
+import { useState } from 'react';
+import { Module } from '../../json/scanrequest/Module';
 import './ModuleSelection.css';
 
-const modules = ["client.dll", "engine.dll", "server.dll", "materialsystem.dll"];
 
-const ModuleSelection = () => {
-  
+interface ModuleSelectionProps {
+  modules: Module[]
+  changeModuleCallback: (newIndex: number) => void
+}
+
+const ModuleSelection = (props: ModuleSelectionProps) => {
+  const [selectedModule, setSelectedModule] = useState("")
+
+  function onChangeModule(e: React.FormEvent<HTMLSelectElement>) {
+    setSelectedModule(e.currentTarget.value)
+    const selectedIndex = props.modules.findIndex(module => module.name === e.currentTarget.value)
+    props.changeModuleCallback(selectedIndex)
+  }
+
   return (
   <div className="ModuleSelectionComponent">
     <div className="ModuleSelectionContainer">
       <p>Module</p>
-      <select name="modules" id="ModuleSelection" size={modules.length}>
-        {modules.map(moduleName => 
-          <option key={moduleName} value={moduleName}>{moduleName}</option>
+      <select name="modules" id="ModuleSelection" value={selectedModule} size={props.modules.length} onChange={onChangeModule}>
+        {props.modules.map(module => 
+          <option key={module.name.toString()} value={module.name.toString()}>{module.name.toString()}</option>
         )}
       </select>
     </div>
   </div>
   );
 }
-
-ModuleSelection.propTypes = {};
-
-ModuleSelection.defaultProps = {};
 
 export default ModuleSelection;
