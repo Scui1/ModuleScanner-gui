@@ -24,7 +24,7 @@ const ModuleSelection = (props: ModuleSelectionProps) => {
       <p>Module</p>
       <select name="modules" id="ModuleSelection" value={selectedModule} size={props.modules.length} onChange={onChangeModule}>
         {props.modules.map(module => 
-          <option key={module.name.toString()} value={module.name.toString()}>{module.name.toString()}</option>
+          <option key={module.name} value={module.name}>{module.name}</option>
         )}
       </select>
     </div>

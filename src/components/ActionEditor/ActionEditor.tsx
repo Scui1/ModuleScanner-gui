@@ -48,6 +48,12 @@ const ActionEditor = (props: ActionEditingProps) => {
     props.action.arguments[index] = newVal
   }
 
+  function blockNonDigitsInNumberInput(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (!/[0-9]/.test(e.key)) {
+      e.preventDefault();
+    }
+  }
+
   function renderArguments (actionType: String) {
     switch (actionType) {
       case "PatternSearch":
@@ -56,14 +62,14 @@ const ActionEditor = (props: ActionEditingProps) => {
             <label htmlFor="bytePattern">Pattern: </label>
             <input type="text" name="bytePattern" value={actionArguments[0]} onChange={e=>onChangeArgument(e, 0)}/>
             <label htmlFor="occurrences">Occurrences: </label>
-            <input type="number" name="occurrences" min="1" value={actionArguments[1]} onChange={e=>onChangeArgument(e, 1)}/>
+            <input type="number" name="occurrences" min="1" onKeyDown={blockNonDigitsInNumberInput} value={actionArguments[1]} onChange={e=>onChangeArgument(e, 1)}/>
             <label htmlFor="searchDirection">Search direction: </label>
-            <select name="searchDirection" id="searchDirection" value={actionArguments[2]} onChange={e=>onChangeArgument(e, 2)}>
+            <select name="searchDirection" value={actionArguments[2]} onChange={e=>onChangeArgument(e, 2)}>
               <option key="down" value="DOWN">Down</option>
               <option key="up" value="UP">Up</option>
             </select>
             <label htmlFor="maxBytesToSearch">Max bytes to search: </label>
-            <input type="number" name="maxBytesToSearch" min="1" value={actionArguments[3]} onChange={e=>onChangeArgument(e, 3)}/>
+            <input type="number" name="maxBytesToSearch" min="1" onKeyDown={blockNonDigitsInNumberInput} value={actionArguments[3]} onChange={e=>onChangeArgument(e, 3)}/>
           </>
         );
       case "StringSearch":
@@ -72,7 +78,7 @@ const ActionEditor = (props: ActionEditingProps) => {
             <label htmlFor="string">String: </label>
             <input type="text" name="string" value={actionArguments[0]} onChange={e=>onChangeArgument(e, 0)}/>
             <label htmlFor="occurrences">Occurrences: </label>
-            <input type="number"  name="occurrences" min="1" value={actionArguments[1]} onChange={e=>onChangeArgument(e, 1)}/>
+            <input type="number" name="occurrences" min="1" onKeyDown={blockNonDigitsInNumberInput} value={actionArguments[1]} onChange={e=>onChangeArgument(e, 1)}/>
             <label htmlFor="addNullTerminator">Add null terminator: </label>
             <input type="checkbox" name="addNullTerminator" value={actionArguments[2]} onChange={e=>onChangeArgument(e, 2)}/>
           </>
@@ -81,21 +87,21 @@ const ActionEditor = (props: ActionEditingProps) => {
         return (
           <>
             <label htmlFor="offset">Offset: </label>
-            <input type="number" name="offset" min="1" defaultValue={actionArguments[0]} onChange={e=>onChangeArgument(e, 0)}/>
+            <input type="number" name="offset" min="1" onKeyDown={blockNonDigitsInNumberInput} value={actionArguments[0]} onChange={e=>onChangeArgument(e, 0)}/>
           </>
         );
       case "GetValue":
         return (
           <>
             <label htmlFor="size">Size: </label>
-            <input type="number" name="size" min="1" defaultValue={actionArguments[0]} onChange={e=>onChangeArgument(e, 0)}/>
+            <input type="number" name="size" min="1" onKeyDown={blockNonDigitsInNumberInput} value={actionArguments[0]} onChange={e=>onChangeArgument(e, 0)}/>
           </>
         );
       case "GetVFuncIndex":
         return (
           <>
             <label htmlFor="size">Size: </label>
-            <input type="number" name="size" min="1" defaultValue={actionArguments[0]} onChange={e=>onChangeArgument(e, 0)}/>
+            <input type="number" name="size" min="1" onKeyDown={blockNonDigitsInNumberInput} value={actionArguments[0]} onChange={e=>onChangeArgument(e, 0)}/>
           </>
         );
       default:

@@ -10,10 +10,12 @@ interface PatternEditorProps {
 }
 
 const PatternEditor = (props: PatternEditorProps) => {
+  const [patternName, setPatternName] = useState<string>("")
   const [actions, setActions] = useState<Action[]>([])
 
   useEffect(() => {
     setActions(props.pattern.actions)
+    setPatternName(props.pattern.name)
   }, [props.pattern])
 
   function deleteAction(indexToRemove: number) {
@@ -27,7 +29,7 @@ const PatternEditor = (props: PatternEditorProps) => {
   function addAction() {
     setActions(oldActions => {
       const newAction = new Action()
-      newAction.arguments = []
+      newAction.arguments = ["", "1", "DOWN", "200"]
       newAction.type = "PatternSearch"
 
       const updatedAction = [...oldActions, newAction]
@@ -36,10 +38,16 @@ const PatternEditor = (props: PatternEditorProps) => {
     })
   }
 
+  function onChangePatternName(e: React.FormEvent<HTMLParagraphElement>) {
+    const newName: string = e.currentTarget.textContent || ""
+    setPatternName(newName)
+    props.pattern.name = newName
+  }
+
   return (
   <div className="PatternEditorComponent">
     <div className="PatternEditorHeader">
-      <p suppressContentEditableWarning={true} contentEditable="true">ClientModeShared::CreateMove</p>
+      <p suppressContentEditableWarning={true} contentEditable="true" onInput={onChangePatternName} onBlur={onChangePatternName}>{patternName}</p>
     </div>
     <div className="EditingArea">
       <div className="ActionsContainer">
