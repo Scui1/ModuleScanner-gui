@@ -25,6 +25,18 @@ const ScanRequestConfiguration = () => {
     })
   }
 
+  function changePatternTypeCallback(newType: string) {
+    setScanRequest(oldScanRequest => {
+      if (!oldScanRequest)
+        return oldScanRequest
+
+      const newScanRequest = Object.assign({}, oldScanRequest);
+      newScanRequest.modules[selectedModuleIndex].patterns[selectedPatternIndex].type = newType
+
+      return newScanRequest
+    })
+  }
+
   useEffect(() => {
     setLoading(true)
     fetch('https://187ju.de/api/getScanConfig.php')
@@ -53,7 +65,8 @@ const ScanRequestConfiguration = () => {
         <PatternSelection patterns={scanRequest.modules[selectedModuleIndex].patterns} changePatternCallback={changePatternCallback}/>
       </div>
       <div className="split right">
-        <PatternEditor pattern={scanRequest.modules[selectedModuleIndex].patterns[selectedPatternIndex]} changePatternNameCallback={changePatternNameCallback}/>
+        <PatternEditor pattern={scanRequest.modules[selectedModuleIndex].patterns[selectedPatternIndex]} 
+          changePatternNameCallback={changePatternNameCallback} changePatternTypeCallback={changePatternTypeCallback}/>
       </div>
     </div>
   );

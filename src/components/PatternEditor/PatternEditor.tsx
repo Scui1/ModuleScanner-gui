@@ -5,18 +5,23 @@ import { useEffect, useState } from 'react';
 import { Action } from '../../json/scanrequest/Action';
 import { Pattern } from '../../json/scanrequest/Pattern';
 
+const possiblePatternTypes = ["Function", "ReturnAddress", "Offset", "Index"]
+
 interface PatternEditorProps {
   pattern: Pattern
   changePatternNameCallback: (newName: string) => void
+  changePatternTypeCallback: (newType: string) => void
 }
 
 const PatternEditor = (props: PatternEditorProps) => {
   const [patternName, setPatternName] = useState<string>("")
+  const [patternType, setPatternType] = useState<string>("")
   const [actions, setActions] = useState<Action[]>([])
 
   useEffect(() => {
     setActions(props.pattern.actions)
     setPatternName(props.pattern.name)
+    setPatternType(props.pattern.type)
   }, [props.pattern])
 
   function deleteAction(indexToRemove: number) {
@@ -39,16 +44,27 @@ const PatternEditor = (props: PatternEditorProps) => {
     })
   }
 
-  function onChangePatternName(e: React.FormEvent<HTMLParagraphElement>) {
-    const newName: string = e.currentTarget.textContent || ""
+  function onChangePatternName(e: React.FormEvent<HTMLInputElement>) {
+    const newName: string = e.currentTarget.value
     setPatternName(newName)
     props.changePatternNameCallback(newName)
+  }
+
+  function onChangePatternType(e: React.FormEvent<HTMLSelectElement>) {
+    const newType = e.currentTarget.value
+    setPatternType(newType)
+    props.changePatternTypeCallback(newType)
   }
 
   return (
   <div className="PatternEditorComponent">
     <div className="PatternEditorHeader">
-      <p suppressContentEditableWarning={true} contentEditable="true" onInput={onChangePatternName} onBlur={onChangePatternName}>{patternName}</p>
+      <select id="PatternTypeSelect" name="patternType" value={patternType} onChange={onChangePatternType}>
+        {possiblePatternTypes.map(typeName => 
+            <option key={typeName} value={typeName}>{typeName}</option>
+        )}
+      </select>
+      <input type="text" id="PatternNameInput" name="patternName" value={patternName} onChange={onChangePatternName}></input>
     </div>
     <div className="EditingArea">
       <div className="ActionsContainer">

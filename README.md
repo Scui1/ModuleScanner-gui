@@ -2,7 +2,7 @@
 - Adding new patterns
 - Small window/notification for output of scan
 - ScanningService to run scans
-- Pattern type can be chosen
+- Filtering patterns
 
 # Scripts
 ### `npx generate-react-cli component MyComponent`

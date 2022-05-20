@@ -5,11 +5,35 @@
     overflow-y: scroll;
 }
 
-.PatternEditorHeader [contentEditable] {
-    padding-top: 5vh;
-    padding-bottom: 5vh;
+.PatternEditorHeader {
+    padding-top: 3vh;
+    padding-bottom: 3vh;
+}
+
+#PatternNameInput {
+    width: 40%;
+    font-size: x-large;
     font-weight: bold;
-    outline: 0px solid transparent;
+    color: wheat;
+    outline: 1px solid wheat;
+    border-color: transparent;
+    background-color: transparent;
+}
+
+#PatternTypeSelect {
+    width: 15%;
+    position: absolute;
+    left: 9.8%;
+    font-size: x-large;
+    border-color: transparent;
+    background-color: transparent;
+    color: wheat;
+    outline: 1px solid wheat;
+}
+
+#PatternTypeSelect option {
+    color: white;
+    background-color: #2b2a33;
 }
 
 .ActionsContainer {
@@ -17,6 +41,6 @@
 }
 
 .PatternEditorFooter {
-    padding-top: 5vh;
-    padding-bottom: 5vh;
+    padding-top: 3vh;
+    padding-bottom: 3vh;
 }
