@@ -7,6 +7,7 @@ import { Pattern } from '../../json/scanrequest/Pattern';
 
 interface PatternEditorProps {
   pattern: Pattern
+  changePatternNameCallback: (newName: string) => void
 }
 
 const PatternEditor = (props: PatternEditorProps) => {
@@ -41,7 +42,7 @@ const PatternEditor = (props: PatternEditorProps) => {
   function onChangePatternName(e: React.FormEvent<HTMLParagraphElement>) {
     const newName: string = e.currentTarget.textContent || ""
     setPatternName(newName)
-    props.pattern.name = newName
+    props.changePatternNameCallback(newName)
   }
 
   return (
