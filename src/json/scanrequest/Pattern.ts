@@ -1,7 +1,7 @@
 import { Action } from "./Action"
 
 export class Pattern {
-    name: string
-    type: string
-    actions: Action[]
+    name: string = ""
+    type: string = ""
+    actions: Action[] = []
 }

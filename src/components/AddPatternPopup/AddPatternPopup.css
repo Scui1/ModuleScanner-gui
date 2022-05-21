@@ -1,0 +1,60 @@
+/* Div to block all input */
+.AddPatternPopup {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: transparent;
+}
+
+.AddPatternPopupContainer {
+    position: fixed;
+    top: 30%;
+    left: 40%;
+    width: 20%;
+    height: 15%;
+    background-color: rgb(34, 34, 34);
+    border: 1px solid rgb(197, 181, 181);
+    z-index: 1;
+}
+
+.NewPatternType {
+    position: absolute;
+    left: 13%;
+    top: 30%;
+    width: 30%;
+}
+
+.NewPatternName {
+    position: absolute;
+    left: 13%;
+    top: 50%;
+    width: 70%;
+}
+
+.PopupOptions {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    display: flex;
+    padding-bottom: 2%;
+    padding-right: 2%;
+    justify-content: right;
+    column-gap: 10px;
+    justify-content: space-between;
+}
+
+.PopupButton {
+    width: 50px;
+    background-color: transparent;
+    color: whitesmoke;
+}
+
+.ClosePopupButton {
+    border: 2px solid rgb(94, 94, 94);
+}
+
+.AddPatternBtn {
+    border: 2px solid green;
+}

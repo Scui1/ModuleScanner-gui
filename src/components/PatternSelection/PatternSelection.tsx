@@ -6,6 +6,7 @@ import './PatternSelection.css';
 interface PatternSelectionProps {
   patterns: Pattern[]
   changePatternCallback: (newIndex: number) => void
+  openAddPatternCallback: () => void
 }
 
 const PatternSelection = (props: PatternSelectionProps) => {
@@ -25,10 +26,11 @@ const PatternSelection = (props: PatternSelectionProps) => {
   return (
   <div className="PatternSelectionComponent">
     <div className="PatternSelectionContainer">
-      <p>Pattern</p>
+      <p className="PatternLabel">Pattern</p>
+      <button className="AddPatternButton" onClick={props.openAddPatternCallback}>+</button>
       <select name="Patterns" id="PatternSelection" value={selectedPattern} size={props.patterns.length} onChange={onChangeSelectedPattern}>
-        {patterns.map(pattern => 
-          <option key={pattern.name} value={pattern.name}>{`(${pattern.type}) ${pattern.name}`}</option>
+        {patterns.map((pattern, index) => 
+          <option key={pattern.name + index} value={pattern.name}>{`(${pattern.type}) ${pattern.name}`}</option>
         )}
       </select>
     </div>

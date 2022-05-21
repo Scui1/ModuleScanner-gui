@@ -18,3 +18,13 @@
     width: 100%;
     height: 100%;
 }
+
+.PatternLabel {
+    display: inline;
+}
+
+.AddPatternButton {
+    position: absolute;
+    right: 0px;
+    margin-right: 15%;
+}

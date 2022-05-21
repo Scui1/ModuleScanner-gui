@@ -1,4 +1,4 @@
 export class Action {
-    type: string
-    arguments: string[]
+    type: string = ""
+    arguments: string[] = []
 }

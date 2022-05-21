@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { Action } from '../../json/scanrequest/Action';
 import { Pattern } from '../../json/scanrequest/Pattern';
 
+// TODO: put this in a central place, we need it in the popup aswell
 const possiblePatternTypes = ["Function", "ReturnAddress", "Offset", "Index"]
 
 interface PatternEditorProps {
