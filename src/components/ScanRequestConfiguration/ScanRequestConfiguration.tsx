@@ -13,7 +13,7 @@ const ScanRequestConfiguration = () => {
   const [loading, setLoading] = useState<boolean>(false)
   const [scanRequest, setScanRequest] = useState<ScanRequest | null>(null)
   const [selectedModuleIndex, setSelectedModuleIndex] = useState<number>(0)
-  const [selectedPatternIndex, setSelectedPatternIndex] = useState<number>(0)
+  const [selectedPatternIndex, setSelectedPatternIndex] = useState<number>(-1)
   const [addPatternPopupShown, setAddPatternPopupShown] = useState<boolean>(false)
   function changeModuleCallback(newIndex: number) {setSelectedModuleIndex(newIndex)}
   function changePatternCallback(newIndex: number) {setSelectedPatternIndex(newIndex)}
@@ -76,6 +76,25 @@ const ScanRequestConfiguration = () => {
     return !nameAlreadyExists
   }
 
+  function removePattern() {
+    if (selectedPatternIndex === -1 || !scanRequest)
+      return
+
+    const patternName = scanRequest.modules[selectedModuleIndex].patterns[selectedPatternIndex].name
+    setSelectedPatternIndex(-1)
+    setScanRequest(oldScanRequest => {
+      if (!oldScanRequest)
+        return oldScanRequest
+
+      const newScanRequest = Object.assign({}, oldScanRequest);
+      const module = newScanRequest.modules[selectedModuleIndex]
+      const newPatterns = module.patterns.slice().filter(pattern => pattern.name !== patternName)
+      newScanRequest.modules[selectedModuleIndex].patterns = newPatterns
+
+      return newScanRequest
+    })
+  }
+
   useEffect(() => {
     setLoading(true)
     fetch('https://187ju.de/api/getScanConfig.php')
@@ -104,11 +123,14 @@ const ScanRequestConfiguration = () => {
       <div className="split left">
         <ModuleSelection modules={scanRequest.modules} changeModuleCallback={changeModuleCallback}/>
         <PatternSelection patterns={scanRequest.modules[selectedModuleIndex].patterns} 
-          changePatternCallback={changePatternCallback} openAddPatternCallback={() => setAddPatternPopupShown(true)}/>
+          changePatternCallback={changePatternCallback} addPatternCallback={() => setAddPatternPopupShown(true)} removePatternCallback={removePattern}/>
       </div>
       <div className="split right">
-        <PatternEditor pattern={scanRequest.modules[selectedModuleIndex].patterns[selectedPatternIndex]} 
-          changePatternNameCallback={changePatternNameCallback} changePatternTypeCallback={changePatternTypeCallback}/>
+        { selectedPatternIndex !== -1 ?
+          <PatternEditor pattern={scanRequest.modules[selectedModuleIndex].patterns[selectedPatternIndex]} 
+            changePatternNameCallback={changePatternNameCallback} changePatternTypeCallback={changePatternTypeCallback}/>
+          : <></>
+        }
       </div>
       { addPatternPopupShown ? <AddPatternPopup closePopupCallback={() => setAddPatternPopupShown(false)} addNewPatternCallback={addNewPattern}/> 
         : <></>

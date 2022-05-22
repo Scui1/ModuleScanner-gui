@@ -6,7 +6,8 @@ import './PatternSelection.css';
 interface PatternSelectionProps {
   patterns: Pattern[]
   changePatternCallback: (newIndex: number) => void
-  openAddPatternCallback: () => void
+  addPatternCallback: () => void
+  removePatternCallback: () => void
 }
 
 const PatternSelection = (props: PatternSelectionProps) => {
@@ -21,13 +22,24 @@ const PatternSelection = (props: PatternSelectionProps) => {
 
   useEffect(() => {
     setPatterns(props.patterns)
-  }, [props.patterns])
+    const selectedIndex = props.patterns.findIndex(pattern => pattern.name === selectedPattern)
+    if (selectedIndex === -1) {
+      if (props.patterns.length > 0) {
+        setSelectedPattern(props.patterns[0].name)
+        props.changePatternCallback(0)
+      }
+    } else {
+      setSelectedPattern(props.patterns[selectedIndex].name)
+      props.changePatternCallback(selectedIndex)
+    }
+  }, [props.patterns, props, selectedPattern])
   
   return (
   <div className="PatternSelectionComponent">
     <div className="PatternSelectionContainer">
       <p className="PatternLabel">Pattern</p>
-      <button className="AddPatternButton" onClick={props.openAddPatternCallback}>+</button>
+      <button className="RemovePatternButton" onClick={props.removePatternCallback}>-</button>
+      <button className="AddPatternButton" onClick={props.addPatternCallback}>+</button>
       <select name="Patterns" id="PatternSelection" value={selectedPattern} size={props.patterns.length} onChange={onChangeSelectedPattern}>
         {patterns.map((pattern, index) => 
           <option key={pattern.name + index} value={pattern.name}>{`(${pattern.type}) ${pattern.name}`}</option>
