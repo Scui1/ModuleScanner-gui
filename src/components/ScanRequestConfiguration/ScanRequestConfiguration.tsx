@@ -18,6 +18,11 @@ const ScanRequestConfiguration = () => {
   function changeModuleCallback(newIndex: number) {setSelectedModuleIndex(newIndex)}
   function changePatternCallback(newIndex: number) {setSelectedPatternIndex(newIndex)}
   function changePatternNameCallback(newName: string) {
+    if (!isValidPatternName(newName)) {
+      notifier.error("Not a valid pattern name. Name must not be empty and must not exist.")
+      return;
+    }
+
     setScanRequest(oldScanRequest => {
       if (!oldScanRequest)
         return oldScanRequest
@@ -42,7 +47,11 @@ const ScanRequestConfiguration = () => {
   }
   
   function addNewPattern(newPattern: Pattern) {
-    notifier.success("Found sig at client.dll + 0x10300204")
+    if (!isValidPatternName(newPattern.name)) {
+      notifier.error("Not a valid pattern name. Name must not be empty and must not exist.")
+      return;
+    }
+
     setScanRequest(oldScanRequest => {
       if (!oldScanRequest)
         return oldScanRequest
@@ -54,6 +63,17 @@ const ScanRequestConfiguration = () => {
 
         return newScanRequest
     })
+  }
+
+  function isValidPatternName(name: string): boolean {
+    if (!name || name.length === 0)
+      return false
+
+    const nameAlreadyExists = scanRequest?.modules[selectedModuleIndex].patterns
+      .filter(pattern => pattern.name === name)
+      .length !== 0
+
+    return !nameAlreadyExists
   }
 
   useEffect(() => {

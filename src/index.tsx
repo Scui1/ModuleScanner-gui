@@ -5,7 +5,7 @@ import ScanRequestConfiguration from "./components/ScanRequestConfiguration/Scan
 import './index.css';
 
 notifier.configure({
-    autoClose: 10000,
+    autoClose: 8000,
     position: "top-right",
     delay: 0,
     width: "100%"
