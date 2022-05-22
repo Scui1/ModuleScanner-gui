@@ -7,6 +7,7 @@ import PatternSelection from '..//PatternSelection/PatternSelection';
 import { ScanRequest } from "../../json/scanrequest/ScanRequest";
 import AddPatternPopup from '../AddPatternPopup/AddPatternPopup';
 import { Pattern } from '../../json/scanrequest/Pattern';
+import notifier from '../Notifications/Notifier';
 
 const ScanRequestConfiguration = () => {
   const [loading, setLoading] = useState<boolean>(false)
@@ -41,6 +42,7 @@ const ScanRequestConfiguration = () => {
   }
   
   function addNewPattern(newPattern: Pattern) {
+    notifier.success("Found sig at client.dll + 0x10300204")
     setScanRequest(oldScanRequest => {
       if (!oldScanRequest)
         return oldScanRequest

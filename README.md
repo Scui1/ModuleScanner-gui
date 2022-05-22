@@ -1,5 +1,4 @@
 # TODO
-- Small window/notification for output of scan
 - ScanningService to run scans
 - Filtering patterns
 - Deleting patterns
