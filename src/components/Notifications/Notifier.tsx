@@ -1,5 +1,5 @@
 import * as React from "react";
-import { render } from "react-dom";
+import * as ReactDOM from 'react-dom/client';
 import NotificationContainer, {
   eventManager,
   Config
@@ -20,6 +20,7 @@ const cls = "simple-react-notifier";
 
 let globalCfg: Config;
 let id = 0;
+let root: ReactDOM.Root | null = null
 
 const notifier: Notifier = (cfg) => {
   cfg = { ...(globalCfg || {}), ...cfg };
@@ -32,18 +33,23 @@ const notifier: Notifier = (cfg) => {
     document.body.appendChild(modalRoot);
   }
 
-  render(
+  if (!root) {
+    root = ReactDOM.createRoot(modalRoot, {identifierPrefix: id.toString()});
+  }
+
+  root.render(
     <NotificationContainer
       {...cfg}
       id={id}
       cleared={() => {
         try {
           document.body.removeChild(modalRoot!);
+          root?.unmount()
+          root = null
         } catch (e) {}
       }}
-    />,
-    modalRoot
-  );
+    />
+  )
 
   id++;
   return id - 1;
