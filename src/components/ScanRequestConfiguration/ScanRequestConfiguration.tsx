@@ -9,6 +9,15 @@ import AddPatternPopup from '../AddPatternPopup/AddPatternPopup';
 import { Pattern } from '../../json/scanrequest/Pattern';
 import notifier from '../Notifications/Notifier';
 
+/*
+ScanService.scan(scanRequest!).then(result => {
+      console.log(result)
+})
+.catch(error => {
+  notifier.error(error?.toString())
+})
+*/
+
 const ScanRequestConfiguration = () => {
   const [loading, setLoading] = useState<boolean>(false)
   const [scanRequest, setScanRequest] = useState<ScanRequest | null>(null)
@@ -108,8 +117,6 @@ const ScanRequestConfiguration = () => {
       setLoading(false)
     })
   }, [])
-
-
   
   // new loadingscreen component?
   if (loading)
