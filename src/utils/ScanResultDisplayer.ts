@@ -26,7 +26,7 @@ export module ScanResultDisplayer {
 
         }
         else {
-            notifier.success(`${pattern.name} = ${moduleName} + 0x${resultNumber.toString(16)}`)
+            notifier.success(`${pattern.name} = ${getFormattedResultForPattern(moduleName, pattern, resultNumber)}`)
         }
     }
 
@@ -42,5 +42,18 @@ export module ScanResultDisplayer {
                 return scanResult.vfunc[pattern.name]
         }
         return null
+    }
+
+    function getFormattedResultForPattern(moduleName: string, pattern: Pattern, result: number): string {
+        switch (pattern.type.toLowerCase()) {
+            case "function":
+            case "returnaddress":
+                return `${moduleName} + 0x${result.toString(16).toUpperCase()}`
+            case "offset":
+                return `0x${result.toString(16).toUpperCase()}`
+            case "index":
+                return result.toString()
+        }
+        return ""
     }
 }
