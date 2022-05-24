@@ -4,6 +4,7 @@ import ActionEditor from '../ActionEditor/ActionEditor';
 import { useEffect, useState } from 'react';
 import { Action } from '../../json/scanrequest/Action';
 import { Pattern } from '../../json/scanrequest/Pattern';
+import playIcon from '../../assets/playIcon.png'
 
 // TODO: put this in a central place, we need it in the popup aswell
 const possiblePatternTypes = ["Function", "ReturnAddress", "Offset", "Index"]
@@ -12,6 +13,7 @@ interface PatternEditorProps {
   pattern: Pattern
   changePatternNameCallback: (newName: string) => void
   changePatternTypeCallback: (newType: string) => void
+  scanPatternCallback: () => Promise<void>
 }
 
 const PatternEditor = (props: PatternEditorProps) => {
@@ -66,6 +68,7 @@ const PatternEditor = (props: PatternEditorProps) => {
         )}
       </select>
       <input type="text" id="PatternNameInput" name="patternName" value={patternName} onChange={onChangePatternName}></input>
+      <button className="ScanPatternButton" onClick={props.scanPatternCallback}><img className="ScanPatternButtonImage" src={playIcon} alt="Run"></img></button>
     </div>
     <div className="EditingArea">
       <div className="ActionsContainer">

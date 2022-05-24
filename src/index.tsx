@@ -6,6 +6,7 @@ import './index.css';
 
 notifier.configure({
     autoClose: 8000,
+    pauseOnHover: true,
     position: "top-right",
     delay: 0,
     width: "100%"

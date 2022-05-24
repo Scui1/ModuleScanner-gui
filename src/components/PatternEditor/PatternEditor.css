@@ -44,3 +44,19 @@
     padding-top: 3vh;
     padding-bottom: 3vh;
 }
+
+.ScanPatternButton {
+    position: absolute;
+    top: 2.2%;
+    right: 10.8%;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.ScanPatternButtonImage {
+    font-size: x-large;
+    font-weight: bold;
+    height: 1.7em;
+    cursor: pointer;
+    /*filter: hue-rotate(260deg);*/
+}

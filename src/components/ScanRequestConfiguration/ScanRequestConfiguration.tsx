@@ -8,15 +8,7 @@ import { ScanRequest } from "../../json/scanrequest/ScanRequest";
 import AddPatternPopup from '../AddPatternPopup/AddPatternPopup';
 import { Pattern } from '../../json/scanrequest/Pattern';
 import notifier from '../Notifications/Notifier';
-
-/*
-ScanService.scan(scanRequest!).then(result => {
-      console.log(result)
-})
-.catch(error => {
-  notifier.error(error?.toString())
-})
-*/
+import { ScanResultDisplayer } from '../../utils/ScanResultDisplayer';
 
 const ScanRequestConfiguration = () => {
   const [loading, setLoading] = useState<boolean>(false)
@@ -104,6 +96,13 @@ const ScanRequestConfiguration = () => {
     })
   }
 
+  function scanPattern(): Promise<void> {
+    if (!scanRequest)
+      return new Promise(resolve => resolve())
+
+    return ScanResultDisplayer.scanAndDisplay(scanRequest.modules[selectedModuleIndex].name, scanRequest.modules[selectedModuleIndex].patterns[selectedPatternIndex])
+  }
+
   useEffect(() => {
     setLoading(true)
     fetch('https://187ju.de/api/getScanConfig.php')
@@ -135,7 +134,7 @@ const ScanRequestConfiguration = () => {
       <div className="split right">
         { selectedPatternIndex !== -1 ?
           <PatternEditor pattern={scanRequest.modules[selectedModuleIndex].patterns[selectedPatternIndex]} 
-            changePatternNameCallback={changePatternNameCallback} changePatternTypeCallback={changePatternTypeCallback}/>
+            changePatternNameCallback={changePatternNameCallback} changePatternTypeCallback={changePatternTypeCallback} scanPatternCallback={scanPattern}/>
           : <></>
         }
       </div>

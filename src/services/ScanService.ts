@@ -28,10 +28,14 @@ export default class ScanService {
         })
     }
 
-    static scanPattern(module: Module, pattern: Pattern): Promise<ScanResult> {
+    static scanPattern(moduleName: string, pattern: Pattern): Promise<ScanResult> {
+
+        const module = new Module()
+        module.name = moduleName
+        module.patterns.push(pattern)
+
         const scanRequest = new ScanRequest()
-        scanRequest.modules.push(module)
-        scanRequest.modules[0].patterns.push(pattern)
+        scanRequest.modules = [module]
 
         return this.scan(scanRequest)
     }
