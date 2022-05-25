@@ -68,7 +68,9 @@ const PatternEditor = (props: PatternEditorProps) => {
         )}
       </select>
       <input type="text" id="PatternNameInput" name="patternName" value={patternName} onChange={onChangePatternName}></input>
-      <button className="ScanPatternButton" onClick={props.scanPatternCallback}><img className="ScanPatternButtonImage" src={playIcon} alt="Run"></img></button>
+      <button className="ScanPatternButton" onClick={props.scanPatternCallback}>
+        <img className="ScanPatternButtonImage" src={playIcon} alt="Run"/>
+      </button>
     </div>
     <div className="EditingArea">
       <div className="ActionsContainer">
