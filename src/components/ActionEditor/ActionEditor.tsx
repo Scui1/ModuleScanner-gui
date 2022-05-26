@@ -4,14 +4,6 @@ import { Action } from '../../json/scanrequest/Action';
 import './ActionEditor.css';
 
 const possibleActionTypes: string[] = ["PatternSearch", "StringSearch", "Offset", "FollowJmp", "GetValue", "GetVFuncIndex"]
-const actionArgumentSizes: Record<string, number> = {
-  "PatternSearch": 4,
-  "StringSearch": 3,
-  "Offset": 1,
-  "FollowJmp": 0,
-  "GetValue": 1,
-  "GetVFuncIndex": 1
-}
 
 interface ActionEditingProps {
   action: Action 
@@ -29,16 +21,20 @@ const ActionEditor = (props: ActionEditingProps) => {
   }, [props.action])
 
   function onChangeActionType(e: React.FormEvent<HTMLSelectElement>) {
-    const newArgumentsSize = actionArgumentSizes[e.currentTarget.value]
-    const newArgumentsArray = new Array<string>(newArgumentsSize).fill("")
-    setSelectedActionType(e.currentTarget.value)
+    const newActionType = e.currentTarget.value
+    const newArgumentsArray = getDefaultArgumentsForActionType(newActionType)
+    setSelectedActionType(newActionType)
     setActionArguments(newArgumentsArray)
-    props.action.type = e.currentTarget.value
+    props.action.type = newActionType
     props.action.arguments = newArgumentsArray
   }
 
   function onChangeArgument(e: React.FormEvent<HTMLSelectElement> | React.FormEvent<HTMLInputElement>, index: number) {
-    const newVal = e.currentTarget.value
+    let newVal = e.currentTarget.value
+    if (e.currentTarget.type === "checkbox") {
+      newVal = (e as React.FormEvent<HTMLInputElement>).currentTarget.checked.toString()
+    }
+
     setActionArguments(oldArguments => {
       const newArguments = oldArguments.slice()
       newArguments[index] = newVal
@@ -54,7 +50,23 @@ const ActionEditor = (props: ActionEditingProps) => {
     }
   }
 
-  function renderArguments (actionType: String) {
+  function getDefaultArgumentsForActionType(actionType: string) {
+    switch(actionType) {
+      case "PatternSearch":
+        return ["", "1", "DOWN", "200"]
+      case "StringSearch":
+        return ["", "1", "false"]
+      case "Offset":
+        return ["1"]
+      case "GetValue":
+        return ["4"]
+      case "GetVFuncIndex":
+        return ["4"]
+    }
+    return []
+  }
+
+  function renderArguments (actionType: string) {
     switch (actionType) {
       case "PatternSearch":
         return (
@@ -80,7 +92,7 @@ const ActionEditor = (props: ActionEditingProps) => {
             <label htmlFor="occurrences">Occurrences: </label>
             <input type="number" name="occurrences" min="1" onKeyDown={blockNonDigitsInNumberInput} value={actionArguments[1]} onChange={e=>onChangeArgument(e, 1)}/>
             <label htmlFor="addNullTerminator">Add null terminator: </label>
-            <input type="checkbox" name="addNullTerminator" value={actionArguments[2]} onChange={e=>onChangeArgument(e, 2)}/>
+            <input type="checkbox" name="addNullTerminator" defaultChecked={actionArguments[2] === "true"} onChange={e=>onChangeArgument(e, 2)}/>
           </>
         );
       case "Offset":
