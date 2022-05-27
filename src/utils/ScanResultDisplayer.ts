@@ -26,7 +26,7 @@ export module ScanResultDisplayer {
 
         }
         else {
-            notifier.success(`${pattern.name} = ${getFormattedResultForPattern(moduleName, pattern, resultNumber)}`)
+            notifier.success(getFormattedResultForPattern(moduleName, pattern, resultNumber))
         }
     }
 
@@ -45,14 +45,16 @@ export module ScanResultDisplayer {
     }
 
     function getFormattedResultForPattern(moduleName: string, pattern: Pattern, result: number): string {
+        const prefix = `${pattern.name} = `
         switch (pattern.type.toLowerCase()) {
             case "function":
             case "returnaddress":
-                return `${moduleName} + 0x${result.toString(16).toUpperCase()}`
+                return `${prefix}${moduleName} + <strong>0x${result.toString(16).toUpperCase()}</strong><br/>
+                    With a module base of 0x10000000 this would be <strong>0x${(0x10000000 + result).toString(16).toUpperCase()}</strong>`
             case "offset":
-                return `0x${result.toString(16).toUpperCase()}`
+                return `${prefix}<strong>0x${result.toString(16).toUpperCase()}</strong>`
             case "index":
-                return result.toString()
+                return `${prefix}<strong>${result.toString()}</strong>`
         }
         return ""
     }
