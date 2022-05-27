@@ -74,7 +74,7 @@ const Notification = ({
     onMouseEnter={onMouseEnter}
     onMouseLeave={onMouseLeave}
   >
-    <span>{message}</span>
+    <span dangerouslySetInnerHTML={{__html: message}}></span>
     <button onClick={onClose}>✖</button>
   </div>
 );
