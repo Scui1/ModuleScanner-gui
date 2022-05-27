@@ -22,8 +22,7 @@ export module ScanResultDisplayer {
             if (!scanError)
                 notifier.error(`${pattern.name} failed. There was neither a result nor an error returned by the service, this shouldn't happen.`)
             else
-                notifier.error(`${pattern.name} failed. Error description: ${scanError.description}`)
-
+                notifier.error(`${pattern.name} failed because:<br/> ${scanError.description}`)
         }
         else {
             notifier.success(getFormattedResultForPattern(moduleName, pattern, resultNumber))

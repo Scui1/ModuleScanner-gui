@@ -14,6 +14,7 @@ interface PatternEditorProps {
   changePatternNameCallback: (newName: string) => void
   changePatternTypeCallback: (newType: string) => void
   scanPatternCallback: () => Promise<void>
+  scanActionCallback: (actionIndex: number) => Promise<void>
 }
 
 const PatternEditor = (props: PatternEditorProps) => {
@@ -75,7 +76,7 @@ const PatternEditor = (props: PatternEditorProps) => {
     <div className="EditingArea">
       <div className="ActionsContainer">
         {actions.map((action, index) => 
-          <ActionEditor action={action} deleteCallback={deleteAction} index={index} key={index}/>
+          <ActionEditor action={action} deleteCallback={deleteAction} tryCallback={props.scanActionCallback} index={index} key={index}/>
         )}
       </div>
 

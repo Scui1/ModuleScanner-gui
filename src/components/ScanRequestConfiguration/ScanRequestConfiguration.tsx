@@ -103,6 +103,16 @@ const ScanRequestConfiguration = () => {
     return ScanResultDisplayer.scanAndDisplay(scanRequest.modules[selectedModuleIndex].name, scanRequest.modules[selectedModuleIndex].patterns[selectedPatternIndex])
   }
 
+  function scanAction(actionIndex: number): Promise<void> {
+    if (!scanRequest)
+      return new Promise(resolve => resolve())
+
+    const pattern = Object.assign({}, scanRequest.modules[selectedModuleIndex].patterns[selectedPatternIndex])
+    pattern.actions = scanRequest.modules[selectedModuleIndex].patterns[selectedPatternIndex].actions.slice(0, actionIndex + 1)
+
+    return ScanResultDisplayer.scanAndDisplay(scanRequest.modules[selectedModuleIndex].name, pattern)
+  }
+
   useEffect(() => {
     setLoading(true)
     fetch('https://187ju.de/api/getScanConfig.php')
@@ -134,7 +144,8 @@ const ScanRequestConfiguration = () => {
       <div className="split right">
         { selectedPatternIndex !== -1 ?
           <PatternEditor pattern={scanRequest.modules[selectedModuleIndex].patterns[selectedPatternIndex]} 
-            changePatternNameCallback={changePatternNameCallback} changePatternTypeCallback={changePatternTypeCallback} scanPatternCallback={scanPattern}/>
+            changePatternNameCallback={changePatternNameCallback} changePatternTypeCallback={changePatternTypeCallback} 
+            scanPatternCallback={scanPattern} scanActionCallback={scanAction}/>
           : <></>
         }
       </div>

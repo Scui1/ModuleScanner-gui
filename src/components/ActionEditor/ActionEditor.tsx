@@ -9,6 +9,7 @@ interface ActionEditingProps {
   action: Action 
   index: number
   deleteCallback: (index: number) => void
+  tryCallback: (index: number) => void
 }
 
 const ActionEditor = (props: ActionEditingProps) => {
@@ -131,7 +132,7 @@ const ActionEditor = (props: ActionEditingProps) => {
       </select>
       <div className="actionTools">
         <button className="deleteActionBtn" onClick={() => props.deleteCallback(props.index)}>Delete</button>
-        <button className="tryActionBtn">Try</button>
+        <button className="tryActionBtn" onClick={() => props.tryCallback(props.index)}>Try</button>
       </div>
       <br/>
       {renderArguments(selectedActionType)}
