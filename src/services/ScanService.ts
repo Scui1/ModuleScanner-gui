@@ -2,8 +2,10 @@ import { Module } from "../json/scanrequest/Module";
 import { Pattern } from "../json/scanrequest/Pattern";
 import { ScanRequest } from "../json/scanrequest/ScanRequest";
 import { ScanResult } from "../json/scanresult/ScanResult";
+import AppConfig from "../config";
 
-const SERVICE_URL: string  = "http://127.0.0.1:8080"
+
+const SERVICE_URL: string  = AppConfig.SCAN_SERVICE_URL
 export default class ScanService {
     
     static scan(scanRequest: ScanRequest): Promise<ScanResult> {
