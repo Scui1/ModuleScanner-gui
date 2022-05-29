@@ -9,6 +9,7 @@ import AddPatternPopup from '../AddPatternPopup/AddPatternPopup';
 import { Pattern } from '../../json/scanrequest/Pattern';
 import notifier from '../Notifications/Notifier';
 import { ScanResultDisplayer } from '../../utils/ScanResultDisplayer';
+import ScanConfigService from '../../services/ScanConfigService';
 
 const ScanRequestConfiguration = () => {
   const [loading, setLoading] = useState<boolean>(false)
@@ -115,16 +116,15 @@ const ScanRequestConfiguration = () => {
 
   useEffect(() => {
     setLoading(true)
-    fetch('https://187ju.de/api/getScanConfig.php')
-    .then(response => response.json())
-    .then(scanRequestJson => {
-      setScanRequest( Object.assign(new ScanRequest(), scanRequestJson) as ScanRequest)
-      setLoading(false)
-    })
-    .catch(reason => {
-      console.error(reason)
-      setLoading(false)
-    })
+    ScanConfigService.getScanConfig()
+      .then(scanRequest => {
+        setScanRequest(scanRequest)
+        setLoading(false)
+      })
+      .catch(reason => {
+        console.error(reason)
+        setLoading(false)
+      })
   }, [])
   
   // new loadingscreen component?
