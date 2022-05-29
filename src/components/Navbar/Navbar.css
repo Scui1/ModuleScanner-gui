@@ -1,0 +1,17 @@
+.Navbar {
+    position: fixed;
+    top: 0%;
+    height: 5%;
+    width: 100%;
+    background-color: #474747;
+}
+
+.ActiveComponentButtons {
+    text-align: right;
+    display: flex;
+    justify-content: right;
+    height: 70%;
+    padding-top: 0.3%;
+    padding-right: 0.5%;
+}
+

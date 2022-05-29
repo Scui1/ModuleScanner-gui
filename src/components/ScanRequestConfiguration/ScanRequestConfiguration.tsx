@@ -10,6 +10,7 @@ import { Pattern } from '../../json/scanrequest/Pattern';
 import notifier from '../Notifications/Notifier';
 import { ScanResultDisplayer } from '../../utils/ScanResultDisplayer';
 import ScanConfigService from '../../services/ScanConfigService';
+import Navbar from '../Navbar/Navbar';
 
 const ScanRequestConfiguration = () => {
   const [loading, setLoading] = useState<boolean>(false)
@@ -114,6 +115,19 @@ const ScanRequestConfiguration = () => {
     return ScanResultDisplayer.scanAndDisplay(scanRequest.modules[selectedModuleIndex].name, pattern)
   }
 
+  function saveScanRequest() {
+    if (!scanRequest)
+      return
+
+    ScanConfigService.saveScanConfig(scanRequest)
+    .then(() => {
+      notifier.success("Saved config successfully")
+    })
+    .catch(reason => {
+      notifier.error(`Saving config due to: ${reason}`)
+    })
+  }
+
   useEffect(() => {
     setLoading(true)
     ScanConfigService.getScanConfig()
@@ -136,6 +150,7 @@ const ScanRequestConfiguration = () => {
   
   return (
     <div className="ScanRequestConfiguration">
+      <Navbar customButtons={[<button key="SaveButton" name="Save" className="primaryButton" onClick={saveScanRequest}>Save</button>]}/>
       <div className="split left">
         <ModuleSelection modules={scanRequest.modules} changeModuleCallback={changeModuleCallback}/>
         <PatternSelection patterns={scanRequest.modules[selectedModuleIndex].patterns} 

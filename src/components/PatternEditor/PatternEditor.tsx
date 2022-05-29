@@ -81,7 +81,7 @@ const PatternEditor = (props: PatternEditorProps) => {
       </div>
 
       <div className="PatternEditorFooter">
-        <button className="addActionButton" onClick={addAction}>Add</button>
+        <button className="primaryButton" onClick={addAction}>Add</button>
       </div>
     </div>
   </div>

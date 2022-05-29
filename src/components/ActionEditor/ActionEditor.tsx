@@ -131,8 +131,8 @@ const ActionEditor = (props: ActionEditingProps) => {
         )}
       </select>
       <div className="actionTools">
-        <button className="deleteActionBtn" onClick={() => props.deleteCallback(props.index)}>Delete</button>
-        <button className="tryActionBtn" onClick={() => props.tryCallback(props.index)}>Try</button>
+        <button className="primaryButton" onClick={() => props.deleteCallback(props.index)}>Delete</button>
+        <button className="primaryButton" onClick={() => props.tryCallback(props.index)}>Try</button>
       </div>
       <br/>
       {renderArguments(selectedActionType)}

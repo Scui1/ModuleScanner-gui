@@ -12,3 +12,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.primaryButton {
+  cursor: pointer;
+  color: wheat;
+  background-color: transparent;
+  border: 1px solid wheat;
+}
+
+.primaryButton:hover {
+  color: white;
+  border: 1px solid #888888;
+}

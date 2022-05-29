@@ -38,8 +38,8 @@ const PatternSelection = (props: PatternSelectionProps) => {
   <div className="PatternSelectionComponent">
     <div className="PatternSelectionContainer">
       <p className="PatternLabel">Pattern</p>
-      <button className="RemovePatternButton" onClick={props.removePatternCallback}>-</button>
-      <button className="AddPatternButton" onClick={props.addPatternCallback}>+</button>
+      <button className="primaryButton RemovePatternButton" onClick={props.removePatternCallback}>-</button>
+      <button className="primaryButton AddPatternButton" onClick={props.addPatternCallback}>+</button>
       <select name="Patterns" id="PatternSelection" value={selectedPattern} size={props.patterns.length} onChange={onChangeSelectedPattern}>
         {patterns.map((pattern, index) => 
           <option key={pattern.name + index} value={pattern.name}>{`(${pattern.type}) ${pattern.name}`}</option>
