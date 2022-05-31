@@ -11,6 +11,7 @@ import notifier from '../Notifications/Notifier';
 import { ScanResultDisplayer } from '../../utils/ScanResultDisplayer';
 import ScanConfigService from '../../services/ScanConfigService';
 import Navbar from '../Navbar/Navbar';
+import { Link } from 'react-router-dom';
 
 const ScanRequestConfiguration = () => {
   const [loading, setLoading] = useState<boolean>(false)
@@ -150,7 +151,8 @@ const ScanRequestConfiguration = () => {
   
   return (
     <div className="ScanRequestConfiguration">
-      <Navbar customButtons={[<button key="SaveButton" name="Save" className="primaryButton" onClick={saveScanRequest}>Save</button>]}/>
+      <Navbar navigationButtons={[<Link to="/CacheEditor"><button key="CacheEditorButton" name="CacheEditorButton" className="primaryButton">Cache Editor</button></Link>]}
+        customButtons={[<button key="SaveButton" name="Save" className="primaryButton" onClick={saveScanRequest}>Save</button>]}/>
       <div className="split left">
         <ModuleSelection modules={scanRequest.modules} changeModuleCallback={changeModuleCallback}/>
         <PatternSelection patterns={scanRequest.modules[selectedModuleIndex].patterns} 

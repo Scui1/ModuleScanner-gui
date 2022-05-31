@@ -6,12 +6,19 @@
     background-color: #474747;
 }
 
+.NavigationButtons {
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    height: 100%;
+    padding-left: 1%;
+}
+
 .ActiveComponentButtons {
-    text-align: right;
-    display: flex;
-    justify-content: right;
-    height: 70%;
-    padding-top: 0.3%;
-    padding-right: 0.5%;
+    position: fixed;
+    top: 0%;
+    right: 0%;
+    height: 100%;
+    padding-right: 1%;
 }
 
