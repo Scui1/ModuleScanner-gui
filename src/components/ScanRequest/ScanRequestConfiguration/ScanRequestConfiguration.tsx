@@ -159,15 +159,14 @@ const ScanRequestConfiguration = () => {
           changePatternCallback={changePatternCallback} addPatternCallback={() => setAddPatternPopupShown(true)} removePatternCallback={removePattern}/>
       </div>
       <div className="split right">
-        { selectedPatternIndex !== -1 ?
+        { selectedPatternIndex !== -1 &&
           <PatternEditor pattern={scanRequest.modules[selectedModuleIndex].patterns[selectedPatternIndex]} 
             changePatternNameCallback={changePatternNameCallback} changePatternTypeCallback={changePatternTypeCallback} 
             scanPatternCallback={scanPattern} scanActionCallback={scanAction}/>
-          : <></>
         }
       </div>
-      { addPatternPopupShown ? <AddPatternPopup closePopupCallback={() => setAddPatternPopupShown(false)} addNewPatternCallback={addNewPattern}/> 
-        : <></>
+      { addPatternPopupShown && 
+        <AddPatternPopup closePopupCallback={() => setAddPatternPopupShown(false)} addNewPatternCallback={addNewPattern}/>
       }
     </div>
   );

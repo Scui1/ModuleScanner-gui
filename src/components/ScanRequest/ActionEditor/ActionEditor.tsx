@@ -76,13 +76,16 @@ const ActionEditor = (props: ActionEditingProps) => {
             <input type="text" name="bytePattern" value={actionArguments[0]} onChange={e=>onChangeArgument(e, 0)}/>
             <label htmlFor="occurrences">Occurrences: </label>
             <input type="number" name="occurrences" min="1" onKeyDown={blockNonDigitsInNumberInput} value={actionArguments[1]} onChange={e=>onChangeArgument(e, 1)}/>
-            <label htmlFor="searchDirection">Search direction: </label>
-            <select name="searchDirection" value={actionArguments[2]} onChange={e=>onChangeArgument(e, 2)}>
-              <option key="down" value="DOWN">Down</option>
-              <option key="up" value="UP">Up</option>
-            </select>
-            <label htmlFor="maxBytesToSearch">Max bytes to search: </label>
-            <input type="number" name="maxBytesToSearch" min="1" onKeyDown={blockNonDigitsInNumberInput} value={actionArguments[3]} onChange={e=>onChangeArgument(e, 3)}/>
+            { props.index > 0 && <>
+              <label htmlFor="searchDirection">Search direction: </label>
+              <select name="searchDirection" value={actionArguments[2]} onChange={e=>onChangeArgument(e, 2)}>
+                <option key="down" value="DOWN">Down</option>
+                <option key="up" value="UP">Up</option>
+              </select>
+              <label htmlFor="maxBytesToSearch">Max bytes to search: </label>
+              <input type="number" name="maxBytesToSearch" min="1" onKeyDown={blockNonDigitsInNumberInput} value={actionArguments[3]} onChange={e=>onChangeArgument(e, 3)}/> 
+            </> }
+            
           </>
         );
       case "StringSearch":
