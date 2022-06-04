@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { Module } from '../../json/scanrequest/Module';
+import { Module } from '../../../json/scanrequest/Module';
 import './ModuleSelection.css';
 
 

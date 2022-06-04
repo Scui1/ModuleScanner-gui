@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { Action } from '../../json/scanrequest/Action';
+import { Action } from '../../../json/scanrequest/Action';
 import './ActionEditor.css';
 
 const possibleActionTypes: string[] = ["PatternSearch", "StringSearch", "Offset", "FollowJmp", "GetValue", "GetVFuncIndex"]

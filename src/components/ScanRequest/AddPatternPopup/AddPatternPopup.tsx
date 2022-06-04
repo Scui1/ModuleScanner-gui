@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { Pattern } from '../../json/scanrequest/Pattern';
+import { Pattern } from '../../../json/scanrequest/Pattern';
 import './AddPatternPopup.css';
 
 const possiblePatternTypes = ["Function", "ReturnAddress", "Offset", "Index"]

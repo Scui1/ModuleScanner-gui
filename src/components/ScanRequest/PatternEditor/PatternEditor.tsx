@@ -2,9 +2,9 @@ import * as React from 'react';
 import './PatternEditor.css';
 import ActionEditor from '../ActionEditor/ActionEditor';
 import { useEffect, useState } from 'react';
-import { Action } from '../../json/scanrequest/Action';
-import { Pattern } from '../../json/scanrequest/Pattern';
-import playIcon from '../../assets/playIcon.png'
+import { Action } from '../../../json/scanrequest/Action';
+import { Pattern } from '../../../json/scanrequest/Pattern';
+import playIcon from '../../../assets/playIcon.png'
 
 // TODO: put this in a central place, we need it in the popup aswell
 const possiblePatternTypes = ["Function", "ReturnAddress", "Offset", "Index"]

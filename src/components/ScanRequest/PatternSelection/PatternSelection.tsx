@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { Pattern } from '../../json/scanrequest/Pattern';
+import { Pattern } from '../../../json/scanrequest/Pattern';
 import './PatternSelection.css';
 
 interface PatternSelectionProps {
