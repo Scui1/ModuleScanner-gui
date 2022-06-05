@@ -5,5 +5,5 @@ export class ScanResult {
     returnaddress: Record<string, number> = {}
     offset: Record<string, number> = {}
     vfunc: Record<string, number> = {}
-    errors: Array<ScanError>
+    errors: Array<ScanError> = []
 }
