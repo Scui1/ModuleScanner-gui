@@ -1,4 +1,5 @@
 export class ScanError {
-    patternName: string
-    description: string
+    patternType: string = ""
+    patternName: string = ""
+    description: string = ""
 }

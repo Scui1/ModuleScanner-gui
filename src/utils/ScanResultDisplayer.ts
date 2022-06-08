@@ -2,6 +2,7 @@ import notifier from "../components/Notifications/Notifier";
 import { Pattern } from "../json/scanrequest/Pattern";
 import { ScanResult } from "../json/scanresult/ScanResult";
 import ScanService from "../services/ScanService";
+import { ScanResultExtractor } from "./ScanResultExtractor";
 
 export module ScanResultDisplayer {
     export function scanAndDisplay(moduleName: string, pattern: Pattern): Promise<void> {
@@ -20,9 +21,9 @@ export module ScanResultDisplayer {
         if (!resultNumber) {
             const scanError = scanResult.errors.find(scanError => scanError.patternName === pattern.name)
             if (!scanError)
-                notifier.error(`${pattern.name} failed. There was neither a result nor an error returned by the service, this shouldn't happen.`)
+                notifier.error(`${pattern.type} ${pattern.name} failed. There was neither a result nor an error returned by the service, this shouldn't happen.`)
             else
-                notifier.error(`${pattern.name} failed because:<br/> ${scanError.description}`)
+                notifier.error(`${pattern.type} ${pattern.name} failed because:<br/> ${scanError.description}`)
         }
         else {
             notifier.success(getFormattedResultForPattern(moduleName, pattern, resultNumber))
@@ -30,16 +31,10 @@ export module ScanResultDisplayer {
     }
 
     function getResultForPattern(pattern: Pattern, scanResult: ScanResult): number | null {
-        switch (pattern.type.toLowerCase()) {
-            case "function":
-                return scanResult.function[pattern.name]
-            case "returnaddress":
-                return scanResult.returnaddress[pattern.name]
-            case "offset":
-                return scanResult.offset[pattern.name]
-            case "index":
-                return scanResult.vfunc[pattern.name]
-        }
+        const container = ScanResultExtractor.getContainerForPatternType(pattern.type, scanResult)
+        if (container)
+            return container[pattern.name]
+            
         return null
     }
 

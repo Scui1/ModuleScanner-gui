@@ -1,0 +1,22 @@
+.ScanErrorListComponent {
+    height: 25%;
+    text-align: center;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ScanErrorListContainer {
+    color: #bd2424;
+    width: 70%;
+    height: 70%;
+    text-align: left;
+    overflow-y: hidden;
+}
+
+#ScanErrorSelection {
+    width: 100%;
+    height: 70%;
+    border: 1px solid #bd2424;
+}

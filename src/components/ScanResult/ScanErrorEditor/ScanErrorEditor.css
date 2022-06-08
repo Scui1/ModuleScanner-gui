@@ -1,0 +1,18 @@
+.ScanErrorEditorHeader {
+    padding-top: 3vh;
+    padding-bottom: 3vh;
+    font-size: x-large;
+    font-weight: bold;
+    color: wheat;
+}
+
+.ScanErrorEditorDescription {
+    text-align: left;
+    padding-left: 3%;
+    user-select: text;
+}
+
+.ScanErrorEditorWarnRemoveText {
+    font-size: small;
+    color: rgb(199, 199, 33);
+}

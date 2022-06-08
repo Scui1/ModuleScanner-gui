@@ -24,3 +24,15 @@ code {
   color: white;
   border: 1px solid #888888;
 }
+
+.dangerousButton {
+  cursor: pointer;
+  color: white;
+  background-color: #bd2424;
+  border: 1px solid #423f3f;
+}
+
+.dangerousButton:hover {
+  color: wheat;
+  border: 1px solid #888888;
+}

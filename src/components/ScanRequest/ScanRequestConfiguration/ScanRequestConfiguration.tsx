@@ -151,7 +151,7 @@ const ScanRequestConfiguration = () => {
   
   return (
     <div className="ScanRequestConfiguration">
-      <Navbar navigationButtons={[<Link to="/CacheEditor"><button key="CacheEditorButton" name="CacheEditorButton" className="primaryButton">Cache Editor</button></Link>]}
+      <Navbar navigationButtons={[<Link to="/CacheEditor" key="CacheEditorLink"><button key="CacheEditorButton" name="CacheEditorButton" className="primaryButton">Cache Editor</button></Link>]}
         customButtons={[<button key="SaveButton" name="Save" className="primaryButton" onClick={saveScanRequest}>Save</button>]}/>
       <div className="split left">
         <ModuleSelection modules={scanRequest.modules} changeModuleCallback={changeModuleCallback}/>
