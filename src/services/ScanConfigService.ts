@@ -4,8 +4,8 @@ import { ScanRequest } from "../json/scanrequest/ScanRequest";
 
 
 const SERVICE_URL: string  = AppConfig.SCANCONFIG_SERVICE_URL
-export default class ScanConfigService {
-    static getScanConfig(): Promise<ScanRequest> {
+export module ScanConfigService {
+    export function getScanConfig(): Promise<ScanRequest> {
         return fetch(`${SERVICE_URL}/getScanConfig.php`)
             .then(response => response.json())
             .then(scanRequestConfigJson => {
@@ -16,7 +16,7 @@ export default class ScanConfigService {
             })
     }
 
-    static saveScanConfig(scanConfig: ScanRequest): Promise<void> {
+    export function saveScanConfig(scanConfig: ScanRequest): Promise<void> {
         return fetch(`${SERVICE_URL}/setScanConfig.php`, {
             method: "POST",
             body: JSON.stringify(scanConfig),

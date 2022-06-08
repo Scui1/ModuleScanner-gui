@@ -6,9 +6,9 @@ import AppConfig from "../config";
 
 
 const SERVICE_URL: string  = AppConfig.SCAN_SERVICE_URL
-export default class ScanService {
+export module ScanService {
     
-    static scan(scanRequest: ScanRequest): Promise<ScanResult> {
+    export function scan(scanRequest: ScanRequest): Promise<ScanResult> {
         return fetch(`${SERVICE_URL}/executeScan`, {
             method: "POST",
             body: JSON.stringify(scanRequest),
@@ -30,7 +30,7 @@ export default class ScanService {
         })
     }
 
-    static scanPattern(moduleName: string, pattern: Pattern): Promise<ScanResult> {
+    export function scanPattern(moduleName: string, pattern: Pattern): Promise<ScanResult> {
 
         const module = new Module()
         module.name = moduleName
@@ -39,7 +39,7 @@ export default class ScanService {
         const scanRequest = new ScanRequest()
         scanRequest.modules = [module]
 
-        return this.scan(scanRequest)
+        return scan(scanRequest)
     }
 
 }

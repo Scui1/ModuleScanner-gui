@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ScanResult } from '../../../json/scanresult/ScanResult';
-import ScanResultService from '../../../services/ScanResultService';
+import { ScanResultService } from '../../../services/ScanResultService';
 import { ScanResultExtractor } from '../../../utils/ScanResultExtractor';
 import Navbar from '../../Navbar/Navbar';
 import ScanErrorEditor from '../ScanErrorEditor/ScanErrorEditor';

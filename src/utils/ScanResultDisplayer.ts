@@ -1,7 +1,7 @@
 import notifier from "../components/Notifications/Notifier";
 import { Pattern } from "../json/scanrequest/Pattern";
 import { ScanResult } from "../json/scanresult/ScanResult";
-import ScanService from "../services/ScanService";
+import { ScanService } from "../services/ScanService";
 import { ScanResultExtractor } from "./ScanResultExtractor";
 
 export module ScanResultDisplayer {
@@ -34,7 +34,7 @@ export module ScanResultDisplayer {
         const container = ScanResultExtractor.getContainerForPatternType(pattern.type, scanResult)
         if (container)
             return container[pattern.name]
-            
+
         return null
     }
 
