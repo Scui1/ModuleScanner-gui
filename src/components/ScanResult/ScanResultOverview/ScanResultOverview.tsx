@@ -4,15 +4,20 @@ import { Link } from 'react-router-dom';
 import { ScanResult } from '../../../json/scanresult/ScanResult';
 import { ScanResultService } from '../../../services/ScanResultService';
 import { ScanResultExtractor } from '../../../utils/ScanResultExtractor';
+import { ScanResultItem } from '../../../utils/ScanResultItem';
+import { ScanResultToItemsConverter } from '../../../utils/ScanResultToItemsConverter';
 import Navbar from '../../Navbar/Navbar';
 import ScanErrorEditor from '../ScanErrorEditor/ScanErrorEditor';
 import ScanErrorList from '../ScanErrorList/ScanErrorList';
+import ScanResultList from '../ScanResultList/ScanResultList';
 import './ScanResultOverview.css';
 
 const ScanResultOverview = () => {
   const [loading, setLoading] = useState<boolean>(false)
   const [scanResult, setScanResult] = useState<ScanResult | null>(null)
-  const [selectedErrorIndex, setSelectedErrorIndex] = useState<number>(0);
+  const [selectedErrorIndex, setSelectedErrorIndex] = useState<number>(0)
+  const [selectedResultIndex, setSelectedResultIndex] = useState<number>(-1)
+  const [resultItems, setResultItems] = useState<ScanResultItem[]>([])
 
   useEffect(() => {
     setLoading(true)
@@ -26,6 +31,15 @@ const ScanResultOverview = () => {
         setLoading(false)
       })
   }, [])
+
+  useEffect(() => {
+    setResultItems(oldItems => {
+      if (!scanResult)
+        return []
+
+      return ScanResultToItemsConverter.convertScanResultToItems(scanResult)
+    })
+  }, [scanResult])
 
   function removeErrorAndSetTempValue(tempValue: number) {
     if (!scanResult)
@@ -56,6 +70,10 @@ const ScanResultOverview = () => {
     })
   }
 
+  function onSelectResult(newIndex: number) {
+    setSelectedResultIndex(newIndex)
+  }
+
   if (loading)
     return (<h1>LOADING</h1>);
 
@@ -68,11 +86,14 @@ const ScanResultOverview = () => {
       customButtons={[]}/>
     <div className="split left">
       <ScanErrorList errors={scanResult.errors} changeErrorIndexCallback={setSelectedErrorIndex} />
+      <ScanResultList onSelectResult={onSelectResult} resultItems={resultItems} />
     </div>
     <div className="split right">
       {selectedErrorIndex >= 0 && selectedErrorIndex <= scanResult.errors.length - 1 ?
         <ScanErrorEditor error={scanResult.errors[selectedErrorIndex]} onRemoveErrorCallback={removeErrorAndSetTempValue}/>
-        : 
+        : selectedResultIndex >= 0 && selectedResultIndex <= resultItems.length - 1 ?
+        <h1>MOIN</h1>
+        :
         <></> 
       }
     </div>

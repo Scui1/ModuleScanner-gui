@@ -6,7 +6,7 @@ import "./ScanErrorList.css";
 interface ScanErrorListProps {
     errors: ScanError[]
     changeErrorIndexCallback: (index: number) => void 
-  }
+}
 
 const ScanErrorList = (props: ScanErrorListProps) => {
     const [selectedErrorName, setSelectedErrorName] = useState("")
