@@ -12,6 +12,8 @@ import { ScanResultDisplayer } from '../../../utils/ScanResultDisplayer';
 import Navbar from '../../Navbar/Navbar';
 import { Link } from 'react-router-dom';
 import { ScanConfigService } from '../../../services/ScanConfigService';
+import LoadingScreen from '../../LoadingScreen/LoadingScreen';
+import ErrorScreen from '../../ErrorScreen/ErrorScreen';
 
 const ScanRequestConfiguration = () => {
   const [loading, setLoading] = useState<boolean>(false)
@@ -142,12 +144,11 @@ const ScanRequestConfiguration = () => {
       })
   }, [])
   
-  // new loadingscreen component?
   if (loading)
-    return (<h1>LOADING</h1>);
+    return (<LoadingScreen/>);
 
   if (!scanRequest)
-    return (<h1>ERROR</h1>);
+    return (<ErrorScreen/>);
   
   return (
     <div className="ScanRequestConfiguration">

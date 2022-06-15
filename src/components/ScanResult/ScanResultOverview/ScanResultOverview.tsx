@@ -13,6 +13,8 @@ import ScanErrorList from '../ScanErrorList/ScanErrorList';
 import ScanResultEditor from '../ScanResultEditor/ScanResultEditor';
 import ScanResultList from '../ScanResultList/ScanResultList';
 import './ScanResultOverview.css';
+import LoadingScreen from '../../LoadingScreen/LoadingScreen';
+import ErrorScreen from '../../ErrorScreen/ErrorScreen';
 
 const ScanResultOverview = () => {
   const [loading, setLoading] = useState<boolean>(false)
@@ -111,10 +113,10 @@ const ScanResultOverview = () => {
   }
 
   if (loading)
-    return (<h1>LOADING</h1>);
+    return (<LoadingScreen/>);
 
   if (!scanResult)
-    return (<h1>ERROR</h1>);
+   return (<ErrorScreen/>);
 
   return (
   <div className="ScanResultOverview">

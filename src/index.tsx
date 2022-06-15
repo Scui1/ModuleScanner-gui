@@ -24,7 +24,7 @@ root.render(
         <HashRouter>
             <Routes>
                 <Route path="/" element={<ScanRequestConfiguration />}/>
-                <Route path="/CacheEditor" element={<ScanResultOverview/>}></Route>
+                <Route path="/CacheEditor" element={<ScanResultOverview/>}/>
             </Routes>
             
         </HashRouter>
