@@ -6,3 +6,4 @@
 # Scripts
 ### `npx generate-react-cli component MyComponent`
 ### `npm start`
+### `npm run buildProd`

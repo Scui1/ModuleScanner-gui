@@ -6,9 +6,11 @@ import { ScanResultService } from '../../../services/ScanResultService';
 import { ScanResultExtractor } from '../../../utils/ScanResultExtractor';
 import { ScanResultItem } from '../../../utils/ScanResultItem';
 import { ScanResultToItemsConverter } from '../../../utils/ScanResultToItemsConverter';
+import notifier from '../../Notifications/Notifier';
 import Navbar from '../../Navbar/Navbar';
 import ScanErrorEditor from '../ScanErrorEditor/ScanErrorEditor';
 import ScanErrorList from '../ScanErrorList/ScanErrorList';
+import ScanResultEditor from '../ScanResultEditor/ScanResultEditor';
 import ScanResultList from '../ScanResultList/ScanResultList';
 import './ScanResultOverview.css';
 
@@ -74,6 +76,40 @@ const ScanResultOverview = () => {
     setSelectedResultIndex(newIndex)
   }
 
+  function onSetResultValue(newValue: number) {
+    if (!scanResult)
+      return
+
+    const selectedResultItem = resultItems[selectedResultIndex]
+    const patternName = selectedResultItem.patternName
+    const patternType = selectedResultItem.patternType
+
+    setScanResult(oldScanResult => {
+      if (!oldScanResult)
+        return null
+
+      const newScanResult = Object.assign({}, oldScanResult)
+      const newResultContainer = ScanResultExtractor.getContainerForPatternType(patternType, newScanResult)
+      if (newResultContainer)
+        newResultContainer[patternName] = newValue
+      
+      return newScanResult
+    })
+  }
+
+  function saveScanResult() {
+    if (!scanResult)
+      return
+    
+    ScanResultService.saveScanResult(scanResult)
+      .then(() => {
+        notifier.success("Saved result successfully")
+      })
+      .catch(reason => {
+        notifier.error(`Failed saving result due to: ${reason}`)
+      })
+  }
+
   if (loading)
     return (<h1>LOADING</h1>);
 
@@ -83,7 +119,7 @@ const ScanResultOverview = () => {
   return (
   <div className="ScanResultOverview">
     <Navbar navigationButtons={[<Link to="/" key="ScanConfigurationLink"><button key="ScanConfigurationButton" name="ScanConfigurationButton" className="primaryButton">Scanconfig</button></Link>]} 
-      customButtons={[]}/>
+      customButtons={[<button key="SaveButton" name="Save" className="primaryButton" onClick={saveScanResult}>Save</button>]}/>
     <div className="split left">
       <ScanErrorList errors={scanResult.errors} changeErrorIndexCallback={setSelectedErrorIndex} />
       <ScanResultList onSelectResult={onSelectResult} resultItems={resultItems} />
@@ -91,10 +127,11 @@ const ScanResultOverview = () => {
     <div className="split right">
       {selectedErrorIndex >= 0 && selectedErrorIndex <= scanResult.errors.length - 1 ?
         <ScanErrorEditor error={scanResult.errors[selectedErrorIndex]} onRemoveErrorCallback={removeErrorAndSetTempValue}/>
+
         : selectedResultIndex >= 0 && selectedResultIndex <= resultItems.length - 1 ?
-        <h1>MOIN</h1>
+          <ScanResultEditor resultItem={resultItems[selectedResultIndex]} onChangeValue={onSetResultValue}/>
         :
-        <></> 
+        <p>You need to select something...</p> 
       }
     </div>
     

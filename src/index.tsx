@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from 'react-dom/client';
-import { BrowserRouter, Route, Routes} from "react-router-dom";
+import { HashRouter, Route, Routes} from "react-router-dom";
 import notifier from "./components/Notifications/Notifier";
 import ScanRequestConfiguration from "./components/ScanRequest/ScanRequestConfiguration/ScanRequestConfiguration";
 import ScanResultOverview from "./components/ScanResult/ScanResultOverview/ScanResultOverview";
@@ -21,12 +21,12 @@ if (!rootElement)
 const root = ReactDOM.createRoot(rootElement)
 root.render(
     <React.StrictMode>
-        <BrowserRouter>
+        <HashRouter>
             <Routes>
                 <Route path="/" element={<ScanRequestConfiguration />}/>
                 <Route path="/CacheEditor" element={<ScanResultOverview/>}></Route>
             </Routes>
             
-        </BrowserRouter>
+        </HashRouter>
     </React.StrictMode>
 );

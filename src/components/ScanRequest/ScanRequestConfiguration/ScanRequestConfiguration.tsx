@@ -125,7 +125,7 @@ const ScanRequestConfiguration = () => {
       notifier.success("Saved config successfully")
     })
     .catch(reason => {
-      notifier.error(`Saving config due to: ${reason}`)
+      notifier.error(`Failed saving config due to: ${reason}`)
     })
   }
 

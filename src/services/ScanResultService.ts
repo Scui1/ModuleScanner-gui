@@ -13,4 +13,23 @@ export module ScanResultService {
                 return Promise.reject(error)
             })
     }
+
+    export function saveScanResult(scanResult: ScanResult): Promise<void> {
+        return fetch(`${SERVICE_URL}/setScanResult.php`, {
+            method: "POST",
+            body: JSON.stringify(scanResult),
+            headers: {"Content-Type": "application/json"}
+        })
+            .then(response => {
+                if (response.ok)
+                    return Promise.resolve()
+
+                return response.text().then(errorText => {
+                    throw new Error(errorText)
+                })
+            })
+            .catch((error) => {
+                return Promise.reject(error)
+            })
+    }
 }

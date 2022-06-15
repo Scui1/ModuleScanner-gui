@@ -9,8 +9,7 @@ interface ScanErrorEditorProps {
 }
 
 const ScanErrorEditor = (props: ScanErrorEditorProps) => {
-    const [tempValue, setTempValue] = useState(1)
-
+    const [tempValue, setTempValue] = useState(0)
 
     function onChangeTempValue(e: React.FormEvent<HTMLInputElement>) {
         setTempValue(e.currentTarget.valueAsNumber)
