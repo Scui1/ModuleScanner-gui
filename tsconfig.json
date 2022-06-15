@@ -3,7 +3,7 @@
     "jsx": "react",
     "outDir": "build",
     "module": "ES2022",
-    "target": "es5",
+    "target": "ES2022",
     "lib": ["es6", "dom"],
     "sourceMap": true,
     "allowJs": true,
