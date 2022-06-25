@@ -21,7 +21,10 @@ const ScanRequestConfiguration = () => {
   const [selectedModuleIndex, setSelectedModuleIndex] = useState<number>(0)
   const [selectedPatternIndex, setSelectedPatternIndex] = useState<number>(-1)
   const [addPatternPopupShown, setAddPatternPopupShown] = useState<boolean>(false)
-  function changeModuleCallback(newIndex: number) {setSelectedModuleIndex(newIndex)}
+  function changeModuleCallback(newIndex: number) {
+    setSelectedPatternIndex(0)
+    setSelectedModuleIndex(newIndex)
+  }
   function changePatternCallback(newIndex: number) {setSelectedPatternIndex(newIndex)}
   function changePatternNameCallback(newName: string) {
     if (!isValidPatternName(newName)) {
@@ -160,7 +163,7 @@ const ScanRequestConfiguration = () => {
           changePatternCallback={changePatternCallback} addPatternCallback={() => setAddPatternPopupShown(true)} removePatternCallback={removePattern}/>
       </div>
       <div className="split right">
-        { selectedPatternIndex !== -1 &&
+        { selectedPatternIndex >= 0 && selectedPatternIndex <= scanRequest.modules[selectedModuleIndex].patterns.length - 1 &&
           <PatternEditor pattern={scanRequest.modules[selectedModuleIndex].patterns[selectedPatternIndex]} 
             changePatternNameCallback={changePatternNameCallback} changePatternTypeCallback={changePatternTypeCallback} 
             scanPatternCallback={scanPattern} scanActionCallback={scanAction}/>
