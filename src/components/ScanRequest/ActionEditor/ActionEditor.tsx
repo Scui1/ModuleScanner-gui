@@ -103,21 +103,21 @@ const ActionEditor = (props: ActionEditingProps) => {
         return (
           <>
             <label htmlFor="offset">Offset: </label>
-            <input type="number" name="offset" min="1" onKeyDown={blockNonDigitsInNumberInput} value={actionArguments[0]} onChange={e=>onChangeArgument(e, 0)}/>
+            <input type="number" name="offset" onKeyDown={blockNonDigitsInNumberInput} value={actionArguments[0]} onChange={e=>onChangeArgument(e, 0)}/>
           </>
         );
       case "GetValue":
         return (
           <>
             <label htmlFor="size">Size: </label>
-            <input type="number" name="size" min="1" onKeyDown={blockNonDigitsInNumberInput} value={actionArguments[0]} onChange={e=>onChangeArgument(e, 0)}/>
+            <input type="number" name="size" min="1" max="4" onKeyDown={blockNonDigitsInNumberInput} value={actionArguments[0]} onChange={e=>onChangeArgument(e, 0)}/>
           </>
         );
       case "GetVFuncIndex":
         return (
           <>
             <label htmlFor="size">Size: </label>
-            <input type="number" name="size" min="1" onKeyDown={blockNonDigitsInNumberInput} value={actionArguments[0]} onChange={e=>onChangeArgument(e, 0)}/>
+            <input type="number" name="size" min="1" max="4" onKeyDown={blockNonDigitsInNumberInput} value={actionArguments[0]} onChange={e=>onChangeArgument(e, 0)}/>
           </>
         );
       default:
