@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Action } from '../../../json/scanrequest/Action';
 import './ActionEditor.css';
 
-const possibleActionTypes: string[] = ["PatternSearch", "StringSearch", "Offset", "FollowJmp", "GetValue", "GetVFuncIndex"]
+const possibleActionTypes: string[] = ["PatternSearch", "StringSearch", "Offset", "FollowJmp", "GetValue", "GetVFuncIndex", "Deref"]
 
 interface ActionEditingProps {
   action: Action 
@@ -65,6 +65,8 @@ const ActionEditor = (props: ActionEditingProps) => {
         return ["4"]
       case "GetVFuncIndex":
         return ["4"]
+      case "Deref":
+        return ["1"]
     }
     return []
   }
@@ -120,6 +122,13 @@ const ActionEditor = (props: ActionEditingProps) => {
           <>
             <label htmlFor="size">Size: </label>
             <input type="number" name="size" min="1" max="4" onKeyDown={blockNonDigitsInNumberInput} value={actionArguments[0]} onChange={e=>onChangeArgument(e, 0)}/>
+          </>
+        );
+      case "Deref":
+        return (
+          <>
+            <label htmlFor="times">Times: </label>
+            <input type="number" name="times" min="1" onKeyDown={blockNonDigitsInNumberInput} value={actionArguments[0]} onChange={e=>onChangeArgument(e, 0)}/>
           </>
         );
       default:
