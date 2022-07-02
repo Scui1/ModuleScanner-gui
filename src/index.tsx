@@ -2,6 +2,7 @@ import * as React from "react";
 import * as ReactDOM from 'react-dom/client';
 import { HashRouter, Route, Routes} from "react-router-dom";
 import notifier from "./components/Notifications/Notifier";
+import ScanMonitor from "./components/ScanMonitor/ScanMonitor";
 import ScanRequestConfiguration from "./components/ScanRequest/ScanRequestConfiguration/ScanRequestConfiguration";
 import ScanResultOverview from "./components/ScanResult/ScanResultOverview/ScanResultOverview";
 import './index.css';
@@ -25,6 +26,7 @@ root.render(
             <Routes>
                 <Route path="/" element={<ScanRequestConfiguration />}/>
                 <Route path="/CacheEditor" element={<ScanResultOverview/>}/>
+                <Route path="/ScanMonitor" element={<ScanMonitor/>}/>
             </Routes>
             
         </HashRouter>

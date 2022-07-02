@@ -120,7 +120,10 @@ const ScanResultOverview = () => {
 
   return (
   <div className="ScanResultOverview">
-    <Navbar navigationButtons={[<Link to="/" key="ScanConfigurationLink"><button key="ScanConfigurationButton" name="ScanConfigurationButton" className="primaryButton">Scanconfig</button></Link>]} 
+    <Navbar navigationButtons={[
+        <Link to="/" key="ScanConfigurationLink"><button key="ScanConfigurationButton" name="ScanConfigurationButton" className="primaryButton">Scanconfig</button></Link>,
+        <Link to="/ScanMonitor" key="ScanMonitorLink"><button key="ScanMonitorButton" name="ScanMonitorButton" className="primaryButton">Scan Monitor</button></Link> 
+      ]} 
       customButtons={[<button key="SaveButton" name="Save" className="primaryButton" onClick={saveScanResult}>Save</button>]}/>
     <div className="split left">
       <ScanErrorList errors={scanResult.errors} changeErrorIndexCallback={setSelectedErrorIndex} />

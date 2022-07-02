@@ -1,0 +1,19 @@
+.ScanMonitorComponent {
+    text-align: center;
+    background-color: #272727;
+    font-size: 24px;
+    color: rgba(238, 238, 238, 0.986);
+}
+
+.ScanMonitorDiv {
+    background-color: #272727;
+    height: 95%;
+    width: 100%;
+    position: fixed;
+    top: 5%;
+}
+
+#rescanButton {
+    width: 20%;
+    height: 5%;
+}
