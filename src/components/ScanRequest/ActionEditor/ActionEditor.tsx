@@ -35,7 +35,7 @@ const ActionEditor = (props: ActionEditingProps) => {
     if (e.currentTarget.type === "checkbox") {
       newVal = (e as React.FormEvent<HTMLInputElement>).currentTarget.checked.toString()
     } else {
-      newVal = newVal.replace("$(LF)", "\n")
+      newVal = convertEscapedCharsToAscii(newVal)
     }
 
     setActionArguments(oldArguments => {
@@ -45,6 +45,18 @@ const ActionEditor = (props: ActionEditingProps) => {
       return newArguments
     })
     props.action.arguments[index] = newVal
+  }
+
+  function convertEscapedCharsToAscii(toUnescape: string) {
+    return toUnescape
+      .replaceAll("\\n", "\n")
+      .replaceAll("\\t", "\t")
+  }
+
+  function escapeAsciiChars(toEscape: string) {
+    return toEscape
+      .replaceAll("\n", "\\n")
+      .replaceAll("\t", "\\t")
   }
 
   function blockNonDigitsInNumberInput(e: React.KeyboardEvent<HTMLInputElement>) {
@@ -96,7 +108,7 @@ const ActionEditor = (props: ActionEditingProps) => {
         return (
           <>
             <label htmlFor="string">String: </label>
-            <input type="text" name="string" value={actionArguments[0].replace("\n", "$(LF)")} onChange={e=>onChangeArgument(e, 0)}/>
+            <input type="text" name="string" value={escapeAsciiChars(actionArguments[0])} onChange={e=>onChangeArgument(e, 0)}/>
             <label htmlFor="occurrences">Occurrences: </label>
             <input type="number" name="occurrences" min="1" onKeyDown={blockNonDigitsInNumberInput} value={actionArguments[1]} onChange={e=>onChangeArgument(e, 1)}/>
             <label htmlFor="addNullTerminator">Add null terminator: </label>

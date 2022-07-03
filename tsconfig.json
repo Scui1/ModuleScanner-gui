@@ -4,7 +4,7 @@
     "outDir": "build",
     "module": "ES2022",
     "target": "ES2022",
-    "lib": ["es6", "dom"],
+    "lib": ["ES2022", "dom"],
     "sourceMap": true,
     "allowJs": true,
     "moduleResolution": "node",
