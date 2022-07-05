@@ -34,6 +34,13 @@ const ActionEditor = (props: ActionEditingProps) => {
     let newVal = e.currentTarget.value
     if (e.currentTarget.type === "checkbox") {
       newVal = (e as React.FormEvent<HTMLInputElement>).currentTarget.checked.toString()
+    } else if (e.currentTarget.type === "number") {
+      const parsedValue = parseInt(newVal)
+      if (isNaN(parsedValue)) {
+        newVal = actionArguments[index]
+      } else {
+        newVal = parsedValue.toString()
+      }
     } else {
       newVal = convertEscapedCharsToAscii(newVal)
     }
@@ -57,12 +64,6 @@ const ActionEditor = (props: ActionEditingProps) => {
     return toEscape
       .replaceAll("\n", "\\n")
       .replaceAll("\t", "\\t")
-  }
-
-  function blockNonDigitsInNumberInput(e: React.KeyboardEvent<HTMLInputElement>) {
-    if (!/[0-9]/.test(e.key)) {
-      e.preventDefault();
-    }
   }
 
   function getDefaultArgumentsForActionType(actionType: string) {
@@ -91,7 +92,7 @@ const ActionEditor = (props: ActionEditingProps) => {
             <label htmlFor="bytePattern">Pattern: </label>
             <input type="text" className="actionInputBig" name="bytePattern" value={actionArguments[0]} onChange={e=>onChangeArgument(e, 0)}/>
             <label htmlFor="occurrences">Occurrences: </label>
-            <input type="number" className="actionInputSmall" name="occurrences" min="1" onKeyDown={blockNonDigitsInNumberInput} value={actionArguments[1]} onChange={e=>onChangeArgument(e, 1)}/>
+            <input type="number" className="actionInputSmall" name="occurrences" min="1" value={actionArguments[1]} onChange={e=>onChangeArgument(e, 1)}/>
             { props.index > 0 && <>
               <label htmlFor="searchDirection">Search direction: </label>
               <select name="searchDirection" value={actionArguments[2]} onChange={e=>onChangeArgument(e, 2)}>
@@ -99,7 +100,7 @@ const ActionEditor = (props: ActionEditingProps) => {
                 <option key="up" value="UP">Up</option>
               </select>
               <label htmlFor="maxBytesToSearch">Max bytes to search: </label>
-              <input type="number" className="actionInputSmall" name="maxBytesToSearch" min="1" onKeyDown={blockNonDigitsInNumberInput} value={actionArguments[3]} onChange={e=>onChangeArgument(e, 3)}/> 
+              <input type="number" className="actionInputSmall" name="maxBytesToSearch" min="1" value={actionArguments[3]} onChange={e=>onChangeArgument(e, 3)}/> 
             </> }
             
           </>
@@ -110,7 +111,7 @@ const ActionEditor = (props: ActionEditingProps) => {
             <label htmlFor="string">String: </label>
             <input type="text" className="actionInputBig" name="string" value={escapeAsciiChars(actionArguments[0])} onChange={e=>onChangeArgument(e, 0)}/>
             <label htmlFor="occurrences">Occurrences: </label>
-            <input type="number" className="actionInputSmall" name="occurrences" min="1" onKeyDown={blockNonDigitsInNumberInput} value={actionArguments[1]} onChange={e=>onChangeArgument(e, 1)}/>
+            <input type="number" className="actionInputSmall" name="occurrences" min="1" value={actionArguments[1]} onChange={e=>onChangeArgument(e, 1)}/>
             <label htmlFor="addNullTerminator">Add null terminator: </label>
             <input type="checkbox" name="addNullTerminator" defaultChecked={actionArguments[2] === "true"} onChange={e=>onChangeArgument(e, 2)}/>
           </>
@@ -119,28 +120,28 @@ const ActionEditor = (props: ActionEditingProps) => {
         return (
           <>
             <label htmlFor="offset">Offset: </label>
-            <input type="number" className="actionInputSmall" name="offset" onKeyDown={blockNonDigitsInNumberInput} value={actionArguments[0]} onChange={e=>onChangeArgument(e, 0)}/>
+            <input type="number" className="actionInputSmall" name="offset" value={actionArguments[0]} onChange={e=>onChangeArgument(e, 0)}/>
           </>
         );
       case "GetValue":
         return (
           <>
             <label htmlFor="size">Size: </label>
-            <input type="number" className="actionInputSmall" name="size" min="1" max="4" onKeyDown={blockNonDigitsInNumberInput} value={actionArguments[0]} onChange={e=>onChangeArgument(e, 0)}/>
+            <input type="number" className="actionInputSmall" name="size" min="1" max="4" value={actionArguments[0]} onChange={e=>onChangeArgument(e, 0)}/>
           </>
         );
       case "GetVFuncIndex":
         return (
           <>
             <label htmlFor="size">Size: </label>
-            <input type="number" className="actionInputSmall" name="size" min="1" max="4" onKeyDown={blockNonDigitsInNumberInput} value={actionArguments[0]} onChange={e=>onChangeArgument(e, 0)}/>
+            <input type="number" className="actionInputSmall" name="size" min="1" max="4" value={actionArguments[0]} onChange={e=>onChangeArgument(e, 0)}/>
           </>
         );
       case "Deref":
         return (
           <>
             <label htmlFor="times">Times: </label>
-            <input type="number" className="actionInputSmall" name="times" min="1" onKeyDown={blockNonDigitsInNumberInput} value={actionArguments[0]} onChange={e=>onChangeArgument(e, 0)}/>
+            <input type="number" className="actionInputSmall" name="times" min="1" value={actionArguments[0]} onChange={e=>onChangeArgument(e, 0)}/>
           </>
         );
       default:
