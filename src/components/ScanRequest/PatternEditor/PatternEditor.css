@@ -8,6 +8,7 @@
 .PatternEditorHeader {
     padding-top: 3vh;
     padding-bottom: 3vh;
+    position: relative;
 }
 
 #PatternNameInput {
@@ -21,9 +22,9 @@
 }
 
 #PatternTypeSelect {
-    width: 15%;
     position: absolute;
     left: 9.8%;
+    text-align: left;
     font-size: x-large;
     border-color: transparent;
     background-color: transparent;
@@ -47,8 +48,8 @@
 
 .ScanPatternButton {
     position: absolute;
-    top: 2.2%;
-    right: 10.8%;
+    top: 22%;
+    right: 9.5%;
     background-color: transparent;
     border-color: transparent;
 }
