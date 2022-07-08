@@ -54,6 +54,25 @@ const ActionEditor = (props: ActionEditingProps) => {
     props.action.arguments[index] = newVal
   }
 
+  function validatePattern(e: React.FormEvent<HTMLInputElement>) {
+    const newVal = e.currentTarget.value
+    if (newVal.trim().length === 0) {
+      e.currentTarget.classList.add("actionInputError")
+      return
+    }
+
+    const patternRegex = /^([A-F0-9]{2}|[?]{1,2})$/
+    const byteStrings = newVal.split(" ")
+    for (const byteString of byteStrings) {
+      if (!patternRegex.test(byteString)) {
+        e.currentTarget.classList.add("actionInputError")
+        return
+      }
+    }
+
+    e.currentTarget.classList.remove("actionInputError")
+  }
+
   function convertEscapedCharsToAscii(toUnescape: string) {
     return toUnescape
       .replaceAll("\\n", "\n")
@@ -90,7 +109,7 @@ const ActionEditor = (props: ActionEditingProps) => {
         return (
           <>
             <label htmlFor="bytePattern">Pattern: </label>
-            <input type="text" className="actionInputBig" name="bytePattern" value={actionArguments[0]} onChange={e=>onChangeArgument(e, 0)}/>
+            <input type="text" className="actionInputBig" name="bytePattern" value={actionArguments[0]} onChange={(e)=>{onChangeArgument(e, 0); validatePattern(e)}}/>
             <label htmlFor="occurrences">Occurrences: </label>
             <input type="number" className="actionInputSmall" name="occurrences" min="1" value={actionArguments[1]} onChange={e=>onChangeArgument(e, 1)}/>
             { props.index > 0 && <>

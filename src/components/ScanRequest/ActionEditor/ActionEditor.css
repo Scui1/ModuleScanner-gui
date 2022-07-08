@@ -22,6 +22,10 @@ label {
     min-width: 20px;
 }
 
+.actionInputError {
+    outline: 2px solid red;
+}
+
 .actionTools {
     position: absolute;
     top: 0;
