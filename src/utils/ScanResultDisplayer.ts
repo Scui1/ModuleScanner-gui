@@ -18,7 +18,7 @@ export module ScanResultDisplayer {
             return
     
         const resultNumber = getResultForPattern(pattern, scanResult)
-        if (!resultNumber) {
+        if (resultNumber == null) {
             const scanError = scanResult.errors.find(scanError => scanError.patternName === pattern.name)
             if (!scanError)
                 notifier.error(`${pattern.type} ${pattern.name} failed. There was neither a result nor an error returned by the service, this shouldn't happen.`)
