@@ -8,9 +8,16 @@
 
 .NavigationButtons {
     position: fixed;
+    height: 100%;
     top: 0%;
     left: 0%;
     padding-left: 1%;
+}
+
+.NavigationButton {
+    position: relative;
+    display: inline;
+    margin-right: 1vw;
 }
 
 .ActiveComponentButtons {

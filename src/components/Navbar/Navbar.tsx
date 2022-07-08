@@ -11,7 +11,7 @@ const Navbar = (props: NavbarProps) => {
   return (
     <div className="Navbar">
       <div className="NavigationButtons">
-        {props.navigationButtons.map(button => button)}
+        {props.navigationButtons.map(button => <div className="NavigationButton">{button}</div>)}
       </div>
       <div className="ActiveComponentButtons">
         {props.customButtons.map(button => button)}
