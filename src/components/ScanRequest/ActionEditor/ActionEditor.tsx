@@ -132,7 +132,7 @@ const ActionEditor = (props: ActionEditingProps) => {
             <label htmlFor="occurrences">Occurrences: </label>
             <input type="number" className="actionInputSmall" name="occurrences" min="1" value={actionArguments[1]} onChange={e=>onChangeArgument(e, 1)}/>
             <label htmlFor="addNullTerminator">Add null terminator: </label>
-            <input type="checkbox" name="addNullTerminator" defaultChecked={actionArguments[2] === "true"} onChange={e=>onChangeArgument(e, 2)}/>
+            <input type="checkbox" name="addNullTerminator" checked={actionArguments[2] === "true"} onChange={e=>onChangeArgument(e, 2)}/>
           </>
         );
       case "Offset":
