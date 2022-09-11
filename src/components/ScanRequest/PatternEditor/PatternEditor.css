@@ -46,18 +46,24 @@
     padding-bottom: 3vh;
 }
 
-.ScanPatternButton {
+.PatternButton {
     position: absolute;
     top: 22%;
-    right: 9.5%;
     background-color: transparent;
     border-color: transparent;
 }
 
-.ScanPatternButtonImage {
+.PatternButtonImage {
     font-size: x-large;
     font-weight: bold;
     height: 1.7em;
     cursor: pointer;
-    /*filter: hue-rotate(260deg);*/
+}
+
+#ScanPatternButton {
+    right: 9.5%;
+}
+
+#CopyPatternToClipboardButton {
+    right: 13.5%;
 }

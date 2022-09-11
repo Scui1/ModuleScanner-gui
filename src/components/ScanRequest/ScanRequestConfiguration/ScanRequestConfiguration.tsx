@@ -14,6 +14,7 @@ import { Link } from 'react-router-dom';
 import { ScanConfigService } from '../../../services/ScanConfigService';
 import LoadingScreen from '../../LoadingScreen/LoadingScreen';
 import ErrorScreen from '../../ErrorScreen/ErrorScreen';
+import {PatternExporter} from "../../../utils/PatternExporter";
 
 const ScanRequestConfiguration = () => {
   const [loading, setLoading] = useState<boolean>(false)
@@ -111,6 +112,11 @@ const ScanRequestConfiguration = () => {
     return ScanResultDisplayer.scanAndDisplay(scanRequest.modules[selectedModuleIndex].name, scanRequest.modules[selectedModuleIndex].patterns[selectedPatternIndex])
   }
 
+  function exportPatternToClipboard() {
+    if (scanRequest)
+      PatternExporter.exportPatternToClipBoard(scanRequest.modules[selectedModuleIndex].name, scanRequest.modules[selectedModuleIndex].patterns[selectedPatternIndex])
+  }
+
   function scanAction(actionIndex: number): Promise<void> {
     if (!scanRequest)
       return new Promise(resolve => resolve())
@@ -169,7 +175,7 @@ const ScanRequestConfiguration = () => {
         { selectedPatternIndex >= 0 && selectedPatternIndex <= scanRequest.modules[selectedModuleIndex].patterns.length - 1 &&
           <PatternEditor pattern={scanRequest.modules[selectedModuleIndex].patterns[selectedPatternIndex]} 
             changePatternNameCallback={changePatternNameCallback} changePatternTypeCallback={changePatternTypeCallback} 
-            scanPatternCallback={scanPattern} scanActionCallback={scanAction}/>
+            scanPatternCallback={scanPattern} scanActionCallback={scanAction} exportPatternCallback={exportPatternToClipboard}/>
         }
       </div>
       { addPatternPopupShown && 

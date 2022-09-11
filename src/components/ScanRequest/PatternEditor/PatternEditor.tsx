@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { Action } from '../../../json/scanrequest/Action';
 import { Pattern } from '../../../json/scanrequest/Pattern';
 import playIcon from '../../../assets/playIcon.png'
+import clipboardIcon from '../../../assets/clipboardIcon.svg'
 
 // TODO: put this in a central place, we need it in the popup aswell
 const possiblePatternTypes = ["Function", "ReturnAddress", "Offset", "Index"]
@@ -15,6 +16,7 @@ interface PatternEditorProps {
   changePatternTypeCallback: (newType: string) => void
   scanPatternCallback: () => Promise<void>
   scanActionCallback: (actionIndex: number) => Promise<void>
+  exportPatternCallback: () => void
 }
 
 const PatternEditor = (props: PatternEditorProps) => {
@@ -69,8 +71,11 @@ const PatternEditor = (props: PatternEditorProps) => {
         )}
       </select>
       <input type="text" id="PatternNameInput" name="patternName" value={patternName} onChange={onChangePatternName}></input>
-      <button className="ScanPatternButton" onClick={props.scanPatternCallback}>
-        <img className="ScanPatternButtonImage" src={playIcon} alt="Run"/>
+      <button className="PatternButton" id="CopyPatternToClipboardButton" onClick={props.exportPatternCallback}>
+        <img className="PatternButtonImage" src={clipboardIcon} alt="CopyToClipboard" />
+      </button>
+      <button className="PatternButton" id="ScanPatternButton" onClick={props.scanPatternCallback}>
+        <img className="PatternButtonImage" src={playIcon} alt="Run"/>
       </button>
     </div>
     <div className="EditingArea">
