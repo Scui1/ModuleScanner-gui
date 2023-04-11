@@ -17,7 +17,7 @@ export module ScanResultDisplayer {
         if (!scanResult)
             return
     
-        const resultNumber = getResultForPattern(pattern, scanResult)
+        const resultNumber = getResultForPattern(moduleName, pattern, scanResult)
         if (resultNumber == null) {
             const scanError = scanResult.errors.find(scanError => scanError.patternName === pattern.name)
             if (!scanError)
@@ -30,8 +30,8 @@ export module ScanResultDisplayer {
         }
     }
 
-    function getResultForPattern(pattern: Pattern, scanResult: ScanResult): number | null {
-        const container = ScanResultExtractor.getContainerForPatternType(pattern.type, scanResult)
+    function getResultForPattern(moduleName: string, pattern: Pattern, scanResult: ScanResult): number | null {
+        const container = ScanResultExtractor.getContainerForPattern(moduleName, pattern.type, scanResult)
         if (container)
             return container[pattern.name]
 

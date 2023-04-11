@@ -66,7 +66,7 @@ const ScanResultOverview = () => {
       const newScanResult = Object.assign({}, oldScanResult)
       newScanResult.errors = oldScanResult.errors.slice().filter(oldScanError => oldScanError.patternName !== scanError.patternName)
 
-      const newResultContainer = ScanResultExtractor.getContainerForPatternType(scanError.patternType, newScanResult)
+      const newResultContainer = ScanResultExtractor.getContainerForPattern(scanError.moduleName, scanError.patternType, newScanResult)
       if (newResultContainer)
         newResultContainer[scanError.patternName] = tempValue
 
@@ -83,6 +83,7 @@ const ScanResultOverview = () => {
       return
 
     const selectedResultItem = resultItems[selectedResultIndex]
+    const moduleName = selectedResultItem.moduleName
     const patternName = selectedResultItem.patternName
     const patternType = selectedResultItem.patternType
 
@@ -91,7 +92,7 @@ const ScanResultOverview = () => {
         return null
 
       const newScanResult = Object.assign({}, oldScanResult)
-      const newResultContainer = ScanResultExtractor.getContainerForPatternType(patternType, newScanResult)
+      const newResultContainer = ScanResultExtractor.getContainerForPattern(moduleName, patternType, newScanResult)
       if (newResultContainer)
         newResultContainer[patternName] = newValue
       
