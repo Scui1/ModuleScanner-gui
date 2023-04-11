@@ -1,10 +1,10 @@
 import ApplicationConfig from "../config";
 import { ScanResult } from "../json/scanresult/ScanResult";
 
-const SERVICE_URL: string  = ApplicationConfig.SCAN_RESULT_SERVICE_URL
+const SERVICE_URL: string  = ApplicationConfig.SCAN_MANAGEMENT_URL
 export module ScanResultService {
     export function getScanResult(): Promise<ScanResult> {
-        return fetch(`${SERVICE_URL}/getScanResult.php`)
+        return fetch(`${SERVICE_URL}/getSavedScanResult`)
             .then(response => response.json())
             .then(scanResultJson => {
                 return Object.assign(new ScanResult(), scanResultJson) as ScanResult
@@ -15,8 +15,8 @@ export module ScanResultService {
     }
 
     export function saveScanResult(scanResult: ScanResult): Promise<void> {
-        return fetch(`${SERVICE_URL}/setScanResult.php`, {
-            method: "POST",
+        return fetch(`${SERVICE_URL}/saveScanResult`, {
+            method: "PATCH",
             body: JSON.stringify(scanResult),
             headers: {"Content-Type": "application/json"}
         })

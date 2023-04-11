@@ -14,7 +14,7 @@ export module ScanManagement {
     }
 
     export function startRescan(): Promise<void> {
-        return fetch(`${SERVICE_URL}/csgoUpdate`, {
+        return fetch(`${SERVICE_URL}/gameUpdate`, {
             method: "POST"
         })
         .then(response => {
