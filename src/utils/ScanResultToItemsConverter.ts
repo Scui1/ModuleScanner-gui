@@ -9,9 +9,9 @@ export module ScanResultToItemsConverter {
                 items.push({moduleName: moduleName, patternName: patternName, patternType: "Function", value: scanResult.function[moduleName][patternName]})
         }
 
-        for (const moduleName in scanResult.returnaddress) {
-            for (const patternName in scanResult.returnaddress)
-                items.push({moduleName: moduleName, patternName: patternName, patternType: "ReturnAddress", value: scanResult.returnaddress[moduleName][patternName]})
+        for (const moduleName in scanResult.address) {
+            for (const patternName in scanResult.address)
+                items.push({moduleName: moduleName, patternName: patternName, patternType: "Address", value: scanResult.address[moduleName][patternName]})
         }
 
         for (const patternName in scanResult.offset)

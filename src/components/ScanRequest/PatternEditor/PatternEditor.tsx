@@ -8,7 +8,7 @@ import playIcon from '../../../assets/playIcon.png'
 import clipboardIcon from '../../../assets/clipboardIcon.svg'
 
 // TODO: put this in a central place, we need it in the popup aswell
-const possiblePatternTypes = ["Function", "ReturnAddress", "Offset", "Index"]
+const possiblePatternTypes = ["Function", "Address", "Offset", "Index"]
 
 interface PatternEditorProps {
   pattern: Pattern

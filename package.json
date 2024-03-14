@@ -2,7 +2,7 @@
   "name": "modulescanner-gui",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://187ju.de/modulescanner",
+  "homepage": "https://commonsense2.187ju.de/scanConfig/",
   "dependencies": {
     "@types/react-router-dom": "^5.3.3",
     "react": "^18.1.0",

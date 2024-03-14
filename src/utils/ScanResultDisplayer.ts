@@ -42,7 +42,7 @@ export module ScanResultDisplayer {
         const prefix = `${pattern.name} = `
         switch (pattern.type.toLowerCase()) {
             case "function":
-            case "returnaddress":
+            case "address":
                 return `${prefix}${moduleName} + <strong>0x${result.toString(16).toUpperCase()}</strong><br/>
                     With a module base of 0x10000000 this would be <strong>0x${(0x10000000 + result).toString(16).toUpperCase()}</strong>`
             case "offset":

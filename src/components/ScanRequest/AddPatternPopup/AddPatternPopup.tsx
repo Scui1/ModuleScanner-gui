@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Pattern } from '../../../json/scanrequest/Pattern';
 import './AddPatternPopup.css';
 
-const possiblePatternTypes = ["Function", "ReturnAddress", "Offset", "Index"]
+const possiblePatternTypes = ["Function", "Address", "Offset", "Index"]
 
 interface AddPatternPopupPros {
   closePopupCallback: () => void
