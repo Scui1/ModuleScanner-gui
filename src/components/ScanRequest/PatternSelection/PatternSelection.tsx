@@ -12,27 +12,23 @@ interface PatternSelectionProps {
 
 const PatternSelection = (props: PatternSelectionProps) => {
   const [selectedPattern, setSelectedPattern] = useState("")
+  const [selectedPatternIndex, setSelectedPatternIndex] = useState(0)
   const [patterns, setPatterns] = useState<Pattern[]>([])
 
   function onChangeSelectedPattern(e: React.FormEvent<HTMLSelectElement>) {
-    setSelectedPattern(e.currentTarget.value)
     const selectedIndex = props.patterns.findIndex(pattern => pattern.name === e.currentTarget.value)
+    setSelectedPatternIndex(selectedIndex)
+    setSelectedPattern(e.currentTarget.value)
     props.changePatternCallback(selectedIndex)
   }
 
   useEffect(() => {
     setPatterns(props.patterns)
-    const selectedIndex = props.patterns.findIndex(pattern => pattern.name === selectedPattern)
-    if (selectedIndex === -1) {
-      if (props.patterns.length > 0) {
-        setSelectedPattern(props.patterns[0].name)
-        props.changePatternCallback(0)
-      }
-    } else {
-      setSelectedPattern(props.patterns[selectedIndex].name)
-      props.changePatternCallback(selectedIndex)
+    if (props.patterns.length > 0 && selectedPatternIndex < props.patterns.length) {
+        setSelectedPattern(props.patterns[selectedPatternIndex].name)
+        props.changePatternCallback(selectedPatternIndex)
     }
-  }, [props.patterns, props, selectedPattern])
+  }, [props.patterns, props, selectedPatternIndex])
   
   return (
   <div className="PatternSelectionComponent">
