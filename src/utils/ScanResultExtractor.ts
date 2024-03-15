@@ -5,7 +5,7 @@ export module ScanResultExtractor {
         switch (patternType.toLowerCase()) {
             case "function":
                 return scanResult.function[moduleName]
-            case "naddress":
+            case "address":
                 return scanResult.address[moduleName]
             case "offset":
                 return scanResult.offset
