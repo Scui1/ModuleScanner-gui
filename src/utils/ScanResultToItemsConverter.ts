@@ -10,7 +10,7 @@ export module ScanResultToItemsConverter {
         }
 
         for (const moduleName in scanResult.address) {
-            for (const patternName in scanResult.address)
+            for (const patternName in scanResult.address[moduleName])
                 items.push({moduleName: moduleName, patternName: patternName, patternType: "Address", value: scanResult.address[moduleName][patternName]})
         }
 
