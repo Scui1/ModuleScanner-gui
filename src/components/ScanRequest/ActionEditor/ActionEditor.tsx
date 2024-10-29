@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Action } from '../../../json/scanrequest/Action';
 import './ActionEditor.css';
 
-const possibleActionTypes: string[] = ["PatternSearch", "StringSearch", "Offset", "FollowJmp", "GetValue", "GetVFuncIndex", "Deref"]
+const possibleActionTypes: string[] = ["PatternSearch", "StringSearch", "GetExport", "Offset", "FollowJmp", "GetValue", "GetVFuncIndex", "Deref"]
 
 interface ActionEditingProps {
   action: Action 
@@ -91,6 +91,8 @@ const ActionEditor = (props: ActionEditingProps) => {
         return ["", "1", "DOWN", "200"]
       case "StringSearch":
         return ["", "1", "false"]
+      case "GetExport":
+        return [""]
       case "Offset":
         return ["1"]
       case "GetValue":
@@ -134,6 +136,13 @@ const ActionEditor = (props: ActionEditingProps) => {
             <label htmlFor="addNullTerminator">Add null terminator: </label>
             <input type="checkbox" name="addNullTerminator" checked={actionArguments[2] === "true"} onChange={e=>onChangeArgument(e, 2)}/>
           </>
+        );
+      case "GetExport":
+        return (
+            <>
+              <label htmlFor="exportName">Name: </label>
+              <input type="text" className="actionInputSmall" name="exportName" value={actionArguments[0]} onChange={e=>onChangeArgument(e, 0)}/>
+            </>
         );
       case "Offset":
         return (
