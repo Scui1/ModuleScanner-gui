@@ -141,7 +141,7 @@ const ActionEditor = (props: ActionEditingProps) => {
         return (
             <>
               <label htmlFor="exportName">Name: </label>
-              <input type="text" className="actionInputSmall" name="exportName" value={actionArguments[0]} onChange={e=>onChangeArgument(e, 0)}/>
+              <input type="text" className="actionInputBig" name="exportName" value={actionArguments[0]} onChange={e=>onChangeArgument(e, 0)}/>
             </>
         );
       case "Offset":
