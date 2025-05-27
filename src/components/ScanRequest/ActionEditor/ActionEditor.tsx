@@ -100,7 +100,7 @@ const ActionEditor = (props: ActionEditingProps) => {
       case "GetVFuncIndex":
         return ["4"]
       case "Deref":
-        return ["1"]
+        return ["1", "false"]
     }
     return []
   }
@@ -170,6 +170,8 @@ const ActionEditor = (props: ActionEditingProps) => {
           <>
             <label htmlFor="times">Times: </label>
             <input type="number" className="actionInputSmall" name="times" min="1" value={actionArguments[0]} onChange={e=>onChangeArgument(e, 0)}/>
+            <label htmlFor="absolute">Absolute: </label>
+            <input type="checkbox" name="absolute" checked={actionArguments[1] === "true"} onChange={e=>onChangeArgument(e, 1)}/>
           </>
         );
       default:
